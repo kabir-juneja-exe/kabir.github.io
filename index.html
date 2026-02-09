@@ -196,7 +196,7 @@
             <a href="/snippet" class="nav-link text-sm"><i class="fa-solid fa-arrow-left mr-1"></i>Back to Snippets</a>
         </div>
         <h1 class="text-3xl font-bold mb-6">Giveaway <span class="text-accent">Snippet</span>.</h1>
-        <p class="mb-4 text-text-secondary">This snippet lets you run a simple giveaway using buttons â€” one to enter, and one to end it manually. Since BDFD limits timed events to a maximum of 40 minutes, this avoids using timers entirely.
+        <p class="mb-4 text-text-secondary">This snippet lets you run a simple giveaway using buttons — one to enter, and one to end it manually. Since BDFD limits timed events to a maximum of 40 minutes, this avoids using timers entirely.
             <br>
             <strong>How to Use?</strong><br> Add the commands with their respective triggers in your app. Avoid modifying anything unless you know what you're doing. Make sure to include two variables named: "giveawayParticipants" and "giveawayPrize"
             with empty values.
@@ -227,16 +227,16 @@ $textSplit[$getServerVar[giveawayParticipants];\;]
 $c[Count participants minus dummy entry]
 $var[participantCount;$sub[$getTextSplitLength;1]]
 
-$title[A New Giveaway Has Begun! ðŸŽ‰]
+$title[A New Giveaway Has Begun! 🎉]
 $description[
-ðŸŽ **What's Up for Grabs?**
+🎁 **What's Up for Grabs?**
 *$getServerVar[giveawayPrize]*
 
-ðŸ‘¤ **Hosted By:** <@$authorID>
+👤 **Hosted By:** <@$authorID>
 
-ðŸ‘‡ Want in? Smash the button below to join!
+👇 Want in? Smash the button below to join!
 
-ðŸ† The winner will be picked manually via a button press â€” stay tuned!
+🏆 The winner will be picked manually via a button press — stay tuned!
 ]
 
 $addTimestamp
@@ -309,7 +309,7 @@ $endtry
 $title[Giveaway Winner!]
 $description[
 Congratulations <@$var[winner]>!  
-You have won the giveaway of **$getServerVar[giveawayPrize]!** ðŸŽ‰]
+You have won the giveaway of **$getServerVar[giveawayPrize]!** 🎉]
 $footer[Hosted by $username]
 $color[#FFFF00]
 
@@ -353,7 +353,7 @@ $endtry
 $title[Giveaway Winner!]
 $description[
 Congratulations <@$var[winner]>!  
-You have won the giveaway of **$getServerVar[giveawayPrize]!** ðŸŽ‰]
+You have won the giveaway of **$getServerVar[giveawayPrize]!** 🎉]
 $footer[Hosted by $username]
 $color[#FFFF00]
 
@@ -373,10 +373,10 @@ $endif</code></pre>
                     <pre><code class="bdfd-code">$nomention
 $reply
 
-$title[PokÃ©mon Inventory]
+$title[Pokémon Inventory]
 $description[
-__**$displayName[$findUser[$message[1;user]]]** 's PokÃ©mon Inventory__
-$if[$getUserVar[pokemon.caught;$findUser[$message[1;user]]]==]> no pokÃ©mons yet. 
+__**$displayName[$findUser[$message[1;user]]]** 's Pokémon Inventory__
+$if[$getUserVar[pokemon.caught;$findUser[$message[1;user]]]==]> no pokémons yet. 
 $else >>> $getUserVar[pokemon.caught;$findUser[$message[1;user]]] $endif
 ]
 $color[#36393e]
@@ -391,7 +391,7 @@ $addTimestamp</code></pre>
     <footer>
         <div class="max-w-7xl mx-auto px-6 py-16">
             <div class="text-center">
-                <p class="text-sm text-text-muted font-mono">Â© 2023-2025 Zubariel. All Rights Reserved.</p>
+                <p class="text-sm text-text-muted font-mono">© 2023-2025 Zubariel. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
@@ -543,4 +543,83 @@ $addTimestamp</code></pre>
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
         }
-        document.addEventListener('D
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeConfig = {
+                "defaultTextHighlight": {
+                    "color": 4288341353,
+                    "style": 0
+                },
+                "fallbackHighlight": {
+                    "color": 4285791231,
+                    "style": 0
+                },
+                "bracketHighlight": {
+                    "color": 4294921292,
+                    "style": 1
+                },
+                "semicolonHighlight": {
+                    "color": 4294920266,
+                    "style": 1
+                },
+                "functionsHighlights": {
+                    "$nomention": {
+                        "color": 4294932473,
+                        "style": 0
+                    },
+                    "$catch": {
+                        "color": 4288905212,
+                        "style": 0
+                    },
+                    "$else": {
+                        "color": 4288905212,
+                        "style": 0
+                    },
+                    "$elseif": {
+                        "color": 4288905212,
+                        "style": 0
+                    },
+                    "$endif": {
+                        "color": 4288905212,
+                        "style": 0
+                    },
+                    "$endtry": {
+                        "color": 4288905212,
+                        "style": 0
+                    },
+                    "$error": {
+                        "color": 4288905212,
+                        "style": 0
+                    },
+                    "$if": {
+                        "color": 4288905212,
+                        "style": 0
+                    },
+                    "$try": {
+                        "color": 4288905212,
+                        "style": 0
+                    }
+                }
+            };
+            const bdfdFunctionsInSnippets = ['$deleteIn', '$description', '$image', '$color', '$setServerVar', '$randomText', '$replyIn', '$title', '$getServerVar', '$footer', '$addTimestamp', '$reply', '$onlyIf', '$message', '$setUserVar', '$getUserVar', '$findUser', '$displayName', '$authorID'];
+            bdfdFunctionsInSnippets.forEach(func => {
+                if (!themeConfig.functionsHighlights[func]) {
+                    themeConfig.functionsHighlights[func] = {
+                        color: 4285791231,
+                        style: 0
+                    };
+                }
+            });
+            const codeBlocks = document.querySelectorAll('code.bdfd-code');
+            codeBlocks.forEach(codeElement => {
+                const preElement = codeElement.parentElement;
+                const rawCode = codeElement.textContent || '';
+                const highlightedHtml = BDScriptHighlighter.highlight(rawCode, themeConfig);
+                if (preElement) {
+                    preElement.outerHTML = highlightedHtml;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
