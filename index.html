@@ -1,546 +1,387 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Giveaway Snippet</title>
-    <link rel="icon" href="/images/2pfp.jpg" type="image/x-icon" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>moum</title>
     <style>
-        :root {
-            --bg-primary: #050505;
-            --bg-secondary: #101010;
-            --text-primary: #e4e4e7;
-            --text-secondary: #a1a1aa;
-            --accent: #8b5cf6;
-            --accent-glow: rgba(139, 92, 246, 0.2);
-            --border-color: rgba(255, 255, 255, 0.05);
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(12px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        body {
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
-        }
-
-        .stagger-load>* {
-            opacity: 0;
-            animation: fadeIn 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards;
-        }
-
-        .stagger-load>*:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-
-        .stagger-load>*:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .stagger-load>*:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-
-        .stagger-load>*:nth-child(4) {
-            animation-delay: 0.4s;
-        }
-
-        .stagger-load>*:nth-child(5) {
-            animation-delay: 0.5s;
-        }
-
-        .code-container {
-            position: relative;
-        }
-
-        pre {
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            overflow-x: auto;
-            background: var(--bg-secondary) !important;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
-            line-height: 1.6;
+        /* Reset and base styles */
+        * {
             margin: 0;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            will-change: border-color, box-shadow;
+            padding: 0;
+            box-sizing: border-box;
         }
-
-        pre:hover {
-            border-color: rgba(139, 92, 246, 0.4);
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
-
-        code.bdscript-highlight {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            white-space: pre-wrap;
-            word-break: break-all;
-        }
-
-        .tab-btn {
-            background: var(--bg-secondary);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text-secondary);
-            transition: all 0.25s ease-out;
-            transform: translateY(0);
-            will-change: transform, color, background-color, box-shadow;
-        }
-
-        .tab-btn:hover {
-            transform: translateY(-2px);
-            color: var(--text-primary);
-        }
-
-        .tab-btn.active {
-            background: var(--accent);
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: black;
             color: white;
-            border-color: var(--accent);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 15px var(--accent-glow);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
         }
-
-        .nav-link {
-            color: var(--text-secondary);
-            font-weight: 500;
-            font-size: 0.9rem;
-            text-decoration: none;
-            transition: color 0.3s ease;
+        
+        /* Entry screen */
+        #entry-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            cursor: pointer;
+            transition: opacity 1s ease-in-out;
+        }
+        
+        /* Main content */
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        /* Video background */
+        #video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5;
+            filter: grayscale(100%);
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Content */
+        .content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        /* Profile section */
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            max-width: 400px;
+        }
+        
+        .profile-image-container {
+            position: relative;
+            width: 96px;
+            height: 96px;
+        }
+        
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .profile-decoration {
+            position: absolute;
+            top: -16px;
+            right: -16px;
+            width: 128px;
+            height: 128px;
+            object-fit: contain;
+        }
+        
+        .uid {
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+        
+        .username-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .username {
+            font-size: 1.875rem;
+            font-weight: 700;
+        }
+        
+        .diamond {
+            font-size: 1.5rem;
+            color: #9ca3af;
+        }
+        
+        .badge {
+            height: 24px;
+        }
+        
+        .tagline {
+            font-size: 1.125rem;
+            font-style: italic;
+            letter-spacing: 0.05em;
+        }
+        
+        .tiktok {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+        
+        .tiktok-image {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .dot {
+            color: #ef4444;
+        }
+        
+        .shop {
+            color: #9ca3af;
+        }
+        
+        /* Discord button */
+        .discord-button {
+            margin-top: 1.5rem;
             position: relative;
             display: inline-block;
+            transition: transform 0.3s ease;
         }
-
-        .nav-link::after {
-            content: '';
+        
+        .discord-button:hover {
+            transform: scale(1.1);
+        }
+        
+        .discord-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 0.75rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .discord-button:hover .discord-icon {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* View counter */
+        .view-counter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: #9ca3af;
+            margin-top: 1rem;
+        }
+        
+        /* Audio control */
+        .audio-control {
             position: absolute;
-            width: 100%;
-            transform: scaleX(0);
-            height: 1px;
-            bottom: -4px;
-            left: 0;
-            background-color: var(--accent);
-            transform-origin: bottom right;
-            transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .nav-link:hover {
-            color: var(--text-primary);
-        }
-
-        .nav-link:hover::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
-
-        .copy-button {
-            margin-top: 10px;
-            padding: 8px 16px;
-            background: #333333;
-            color: #ffffff;
+            top: 1rem;
+            right: 1rem;
+            z-index: 20;
+            background-color: rgba(255, 255, 255, 0.1);
             border: none;
-            border-radius: 5px;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            margin-bottom: 50px;
-            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out;
-            will-change: transform, box-shadow;
+            transition: background-color 0.3s ease;
         }
-
-        .copy-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px var(--accent-glow);
-            background-color: #3f3f46;
+        
+        .audio-control:hover {
+            background-color: rgba(255, 255, 255, 0.2);
         }
-
-        .copy-button:active {
-            transform: scale(0.98) translateY(-1px);
-            box-shadow: 0 2px 5px var(--accent-glow);
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-
-        .text-accent {
-            color: var(--accent);
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
-
-        .code-tab {
-            transition: opacity 0.4s ease, transform 0.4s ease;
-            opacity: 1;
-            transform: translateY(0);
-            will-change: opacity, transform;
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
         }
-
-        .code-tab.is-hidden {
-            opacity: 0;
-            transform: translateY(10px);
-            position: absolute;
-            pointer-events: none;
-            height: 0;
-            overflow: hidden;
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in-out forwards;
         }
     </style>
 </head>
-
-<body class="p-8">
-    <div class="max-w-4xl mx-auto stagger-load">
-        <div class="mb-8">
-            <a href="/snippet" class="nav-link text-sm"><i class="fa-solid fa-arrow-left mr-1"></i>Back to Snippets</a>
-        </div>
-        <h1 class="text-3xl font-bold mb-6">Giveaway <span class="text-accent">Snippet</span>.</h1>
-        <p class="mb-4 text-text-secondary">This snippet lets you run a simple giveaway using buttons â€” one to enter, and one to end it manually. Since BDFD limits timed events to a maximum of 40 minutes, this avoids using timers entirely.
-            <br>
-            <strong>How to Use?</strong><br> Add the commands with their respective triggers in your app. Avoid modifying anything unless you know what you're doing. Make sure to include two variables named: "giveawayParticipants" and "giveawayPrize"
-            with empty values.
-            <br>
-            <strong>Credits</strong><br> Inspired by some random code I found somewhere (probably copied, can't remember).
-            <div class="flex gap-2 mb-4">
-                <button class="tab-btn px-4 py-2 rounded active" onclick="showTab('tab-1', event)">!giveaway</button>
-                <button class="tab-btn px-4 py-2 rounded" onclick="showTab('tab-2', event)">$onInteraction</button>
-                <button class="tab-btn px-4 py-2 rounded" onclick="showTab('tab-3', event)">!reroll</button>
-
-            </div>
-            <div class="code-container">
-                <div id="tab-1" class="code-tab">
-                    <pre><code class="bdfd-code">$nomention
-$suppressErrors
-$onlyPerms[managemessages;You need perms]
-$onlyBotPerms[managemessages;I need perms]
-
-$if[$message==]
-Correct usage: !giveaway {prize}
-$else
-$c[Set dummy value so it's never empty]
-$setServerVar[giveawayParticipants;]
-$c[Store the prize]
-$setServerVar[giveawayPrize;$message]
-$c[Split participant list with ; separator]
-$textSplit[$getServerVar[giveawayParticipants];\;]
-$c[Count participants minus dummy entry]
-$var[participantCount;$sub[$getTextSplitLength;1]]
-
-$title[A New Giveaway Has Begun! ðŸŽ‰]
-$description[
-ðŸŽ **What's Up for Grabs?**
-*$getServerVar[giveawayPrize]*
-
-ðŸ‘¤ **Hosted By:** <@$authorID>
-
-ðŸ‘‡ Want in? Smash the button below to join!
-
-ðŸ† The winner will be picked manually via a button press â€” stay tuned!
-]
-
-$addTimestamp
-$color[#2F3136]
-
-$addButton[no;join_giveaway;Participate;secondary;no;]
-$addButton[no;pick_winner-$authorID;Draw Winner;secondary;no;]
-
-$endif</code></pre>
-                    <button class="copy-button" onclick="copyCode(this)">
-          <i class="fa-solid fa-copy mr-2"></i>Copy Code
-        </button>
-                </div>
-                <div id="tab-2" class="code-tab is-hidden">
-                    <pre><code class="bdfd-code">$nomention
-
-$c[Interaction control]
-$if[$customID==join_giveaway]
-
-$removeButtons
-$ephemeral
-
-$c[Check if user has already participated]
-$if[$checkContains[$getServerVar[giveawayParticipants];$authorID]==false]
-
-$c[Add user to participant list]
-$setServerVar[giveawayParticipants;$getServerVar[giveawayParticipants]$authorID\;]
-
-$c[Split the new participant list and count]
-$textSplit[$getServerVar[giveawayParticipants];\;]
-
-$description[<@$authorID>, You have successfully participated along with `$sub[$getTextSplitLength;1]` other people.]
-$color[#008000]
-
-$else
-
-$c[Remove user from participant list]
-$setServerVar[giveawayParticipants;$replaceText[$getServerVar[giveawayParticipants];$authorID\;;]]
-
-$c[Split the new participant list and count]
-$textSplit[$getServerVar[giveawayParticipants];\;]
-
-$description[<@$authorID> has been removed from the giveaway. Only `$sub[$getTextSplitLength;1]` entries left.]
-$color[#FF0000]
-
-$endif
-
-$elseif[$customID==pick_winner-$authorID]
-
-$removeButtons
-
-$c[Split participant list]
-$textSplit[$getServerVar[giveawayParticipants];\;]
-
-$c[Check if participants exist]
-$if[$getTextSplitLength>1]
-
-$c[Draw random index for winner]
-$try
-$var[winnerIndex;$random[1;$getTextSplitLength]]
-$catch
-$endtry
-
-$c[Get user ID from splitText with index]
-$try
-$var[winner;$splitText[$var[winnerIndex]]]
-$catch
-$endtry
-
-$title[Giveaway Winner!]
-$description[
-Congratulations <@$var[winner]>!  
-You have won the giveaway of **$getServerVar[giveawayPrize]!** ðŸŽ‰]
-$footer[Hosted by $username]
-$color[#FFFF00]
-
-$c[Check if winner exists before sending DM]
-$if[$var[winner]!=]
-
-$try
-$sendEmbedMessage[$dmChannelID[$var[winner]];;;;**Congratulations, you have just won the giveaway of *$getServerVar[giveawayPrize]* in $serverName[$guildID]**.;#FFFF00;;;;;;;no;no]
-$catch
-$endtry
-
-$endif
-$endif
-$endif
-$endif</code></pre>
-                    <button class="copy-button" onclick="copyCode(this)">
-          <i class="fa-solid fa-copy mr-2"></i>Copy Code
-        </button>
-                </div>
-                <div id="tab-3" class="code-tab is-hidden">
-                    <pre><code class="bdfd-code">$nomention
-
-$c[Split participant list]
-$textSplit[$getServerVar[giveawayParticipants];\;]
-
-$c[Check if participants exist]
-$if[$getTextSplitLength>1]
-
-$c[Draw random index for winner]
-$try
-$var[winnerIndex;$random[1;$getTextSplitLength]]
-$catch
-$endtry
-
-$c[Get user ID from splitText with index]
-$try
-$var[winner;$splitText[$var[winnerIndex]]]
-$catch
-$endtry
-
-$title[Giveaway Winner!]
-$description[
-Congratulations <@$var[winner]>!  
-You have won the giveaway of **$getServerVar[giveawayPrize]!** ðŸŽ‰]
-$footer[Hosted by $username]
-$color[#FFFF00]
-
-$c[Check if winner exists before sending DM]
-$if[$var[winner]!=]
-
-$try
-$sendEmbedMessage[$dmChannelID[$var[winner]];;;;**Congratulations, you have just won the giveaway of *$getServerVar[giveawayPrize]* in $serverName[$guildID]**.;#FFFF00;;;;;;;no;no]
-$catch
-$endtry
-$endif</code></pre>
-                    <button class="copy-button" onclick="copyCode(this)">
-          <i class="fa-solid fa-copy mr-2"></i>Copy Code
-        </button>
-                </div>
-                <div id="tab-4" class="code-tab is-hidden">
-                    <pre><code class="bdfd-code">$nomention
-$reply
-
-$title[PokÃ©mon Inventory]
-$description[
-__**$displayName[$findUser[$message[1;user]]]** 's PokÃ©mon Inventory__
-$if[$getUserVar[pokemon.caught;$findUser[$message[1;user]]]==]> no pokÃ©mons yet. 
-$else >>> $getUserVar[pokemon.caught;$findUser[$message[1;user]]] $endif
-]
-$color[#36393e]
-$footer[A game played by $username]
-$addTimestamp</code></pre>
-                    <button class="copy-button" onclick="copyCode(this)">
-          <i class="fa-solid fa-copy mr-2"></i>Copy Code
-        </button>
-                </div>
-            </div>
+<body>
+    <!-- Entry Screen -->
+    <div id="entry-screen">
+        <div class="entry-text">click to enter...</div>
     </div>
-    <footer>
-        <div class="max-w-7xl mx-auto px-6 py-16">
-            <div class="text-center">
-                <p class="text-sm text-text-muted font-mono">Â© 2023-2025 Zubariel. All Rights Reserved.</p>
+    
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Video Background -->
+        <video id="video-bg" autoplay loop muted playsinline>
+            <source src="https://r2.guns.lol/767b91b6-25e6-4de1-a5e2-a1235504bc95.mp4" type="video/mp4">
+        </video>
+        <div class="overlay"></div>
+        
+        <!-- Audio -->
+        <audio id="background-audio" loop>
+            <source src="https://r2.guns.lol/767b91b6-25e6-4de1-a5e2-a1235504bc95.mp4" type="audio/mp4">
+        </audio>
+        
+        <!-- Audio Control Button -->
+        <button class="audio-control" id="audio-control">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+                <path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"></path>
+                <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"></path>
+                <line x1="12" y1="19" x2="12" y2="23"></line>
+                <line x1="8" y1="23" x2="16" y2="23"></line>
+            </svg>
+        </button>
+        
+        <!-- Content -->
+        <div class="content">
+            <div class="profile">
+                <!-- Profile Image and Decoration -->
+                <div class="profile-image-container">
+                    <img src="https://cdn.discordapp.com/avatars/1269906993125003297/c8f57743f195c0b3e3911526c868ef41.webp" alt="Profile" class="profile-image">
+                    <img src="https://cdn.discordapp.com/avatar-decoration-presets/a_8ffa2ba9bff18e96b76c2e66fd0d7fa3.png" alt="Avatar Decoration" class="profile-decoration">
+                </div>
+                
+                <p class="uid">UID: 286,873</p>
+                
+                <!-- Username with Diamond and Badges -->
+                <div class="username-container">
+                    <h1 class="username">moum</h1>
+                    <span class="diamond">💎</span>
+                    <img src="https://cdn.discordapp.com/attachments/1255692212717752513/1332489266814783530/roblox-verified-verified.gif" alt="Verified Badge" class="badge">
+                    <img src="https://cdn.discordapp.com/attachments/1255692212717752513/1335303373431373874/black-world.gif" alt="World Badge" class="badge">
+                </div>
+                
+                <p class="tagline">MOUM LOVES YOU</p>
+                
+                <!-- TikTok Handle -->
+                <div class="tiktok">
+                    <img src="https://cdn.discordapp.com/avatars/1269906993125003297/c8f57743f195c0b3e3911526c868ef41.webp" alt="TikTok" class="tiktok-image">
+                    <span>mouumm</span>
+                    <span class="dot">•</span>
+                    <span class="shop">Shop: gg/3G4</span>
+                </div>
+                
+                <!-- Discord Button -->
+                <a href="https://discord.com/users/1269906993125003297" class="discord-button" id="discord-link" target="_blank" rel="noopener noreferrer">
+                    <img src="https://cdn.discordapp.com/attachments/1255692212717752513/1337958933029191732/ec08b212-911e-4858-8f9c-50e7aae76350.webp" alt="Discord" class="discord-icon">
+                </a>
+                
+                <!-- View Counter -->
+                <div class="view-counter">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    <span id="view-count">166</span>
+                </div>
             </div>
         </div>
-    </footer>
+    </div>
+    
     <script>
-        const BDScriptHighlighter = (function() {
-            function intToRgba(intColor) {
-                if (typeof intColor !== 'number' || isNaN(intColor)) return 'rgba(228, 228, 231, 1)';
-                const r = (intColor >> 16) & 0xFF;
-                const g = (intColor >> 8) & 0xFF;
-                const b = intColor & 0xFF;
-                let a = ((intColor >> 24) & 0xFF);
-                a = (isNaN(a) || a < 0 || a > 255) ? 255 : a;
-                return `rgba(${r}, ${g}, ${b}, ${a / 255})`;
+        // Entry screen functionality
+        const entryScreen = document.getElementById('entry-screen');
+        const audioElement = document.getElementById('background-audio');
+        const audioControl = document.getElementById('audio-control');
+        const discordLink = document.getElementById('discord-link');
+        const viewCount = document.getElementById('view-count');
+        
+        // Handle entry screen click
+        entryScreen.addEventListener('click', () => {
+            entryScreen.style.opacity = '0';
+            setTimeout(() => {
+                entryScreen.style.display = 'none';
+            }, 1000);
+        });
+        
+        // Audio control
+        let isMuted = true;
+        
+        audioControl.addEventListener('click', () => {
+            isMuted = !isMuted;
+            
+            if (isMuted) {
+                audioElement.pause();
+                audioControl.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="1" y1="1" x2="23" y2="23"></line>
+                        <path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"></path>
+                        <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"></path>
+                        <line x1="12" y1="19" x2="12" y2="23"></line>
+                        <line x1="8" y1="23" x2="16" y2="23"></line>
+                    </svg>
+                `;
+            } else {
+                audioElement.play();
+                audioControl.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                `;
             }
-
-            function escapeHtml(unsafe) {
-                if (typeof unsafe !== 'string') return '';
-                return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        });
+        
+        // Increment view count when Discord link is clicked
+        discordLink.addEventListener('click', () => {
+            const currentCount = parseInt(viewCount.textContent);
+            viewCount.textContent = currentCount + 1;
+            
+            // Store the updated count in localStorage
+            localStorage.setItem('viewCount', currentCount + 1);
+        });
+        
+        // Load view count from localStorage if available
+        document.addEventListener('DOMContentLoaded', () => {
+            const storedCount = localStorage.getItem('viewCount');
+            if (storedCount) {
+                viewCount.textContent = storedCount;
             }
+        });
+    </script>
+</body>
+</html>
 
-            function safeGet(obj, path, defaultValue) {
-                const keys = path.split('.');
-                let current = obj;
-                for (const key of keys) {
-                    if (current === null || typeof current !== 'object' || !(key in current)) return defaultValue;
-                    current = current[key];
-                }
-                return current === undefined ? defaultValue : current;
-            }
-
-            function getStyleCss(colorInt, styleInt) {
-                const color = intToRgba(colorInt);
-                let fontWeight = 'normal',
-                    fontStyle = 'normal';
-                if (styleInt === 1 || styleInt === 3) fontWeight = 'bold';
-                if (styleInt === 2 || styleInt === 3) fontStyle = 'italic';
-                return `color: ${color}; font-weight: ${fontWeight}; font-style: ${fontStyle};`;
-            }
-
-            function highlight(code, themeConfig) {
-                if (typeof code !== 'string') code = '';
-                if (typeof themeConfig !== 'object' || themeConfig === null) themeConfig = {};
-                const defaultStyleCss = getStyleCss(safeGet(themeConfig, 'defaultTextHighlight.color'), safeGet(themeConfig, 'defaultTextHighlight.style'));
-                const fallbackStyleCss = getStyleCss(safeGet(themeConfig, 'fallbackHighlight.color'), safeGet(themeConfig, 'fallbackHighlight.style'));
-                const bracketStyleCss = getStyleCss(safeGet(themeConfig, 'bracketHighlight.color'), safeGet(themeConfig, 'bracketHighlight.style'));
-                const semicolonStyleCss = getStyleCss(safeGet(themeConfig, 'semicolonHighlight.color'), safeGet(themeConfig, 'semicolonHighlight.style'));
-                const functionMap = new Map();
-                const functionsHighlights = safeGet(themeConfig, 'functionsHighlights', {});
-                for (const funcName in functionsHighlights) {
-                    if (Object.hasOwnProperty.call(functionsHighlights, funcName) && funcName.startsWith('$')) {
-                        const funcData = functionsHighlights[funcName];
-                        functionMap.set(funcName, getStyleCss(safeGet(funcData, 'color'), safeGet(funcData, 'style')));
-                    }
-                }
-                let resultHtml = '';
-                const functionRegex = /(\$[$a-zA-Z0-9_]+)/g;
-                let lastIndex = 0;
-                code.replace(functionRegex, (match, funcName, offset) => {
-                    if (offset > lastIndex) {
-                        resultHtml += processTextSegment(code.substring(lastIndex, offset), defaultStyleCss, bracketStyleCss, semicolonStyleCss);
-                    }
-                    const funcStyleCss = functionMap.get(funcName) || fallbackStyleCss;
-                    resultHtml += `<span style="${funcStyleCss}">${escapeHtml(funcName)}</span>`;
-                    lastIndex = offset + funcName.length;
-                    return match;
-                });
-                if (lastIndex < code.length) {
-                    resultHtml += processTextSegment(code.substring(lastIndex), defaultStyleCss, bracketStyleCss, semicolonStyleCss);
-                }
-                return `<pre><code class="bdscript-highlight">${resultHtml}</code></pre>`;
-            }
-
-            function processTextSegment(text, defaultStyleCss, bracketStyleCss, semicolonStyleCss) {
-                let segmentHtml = '',
-                    currentBuffer = '',
-                    inString = false,
-                    stringChar = null,
-                    escapeNext = false;
-                for (let i = 0; i < text.length; i++) {
-                    const char = text[i];
-                    if (escapeNext) {
-                        currentBuffer += char;
-                        escapeNext = false;
-                        continue;
-                    }
-                    if (char === '\\') {
-                        currentBuffer += char;
-                        escapeNext = true;
-                        continue;
-                    }
-                    if (inString) {
-                        currentBuffer += char;
-                        if (char === stringChar) inString = false;
-                        continue;
-                    }
-                    if (char === "'" || char === '"' || char === '`') {
-                        if (currentBuffer.length > 0) {
-                            segmentHtml += `<span style="${defaultStyleCss}">${escapeHtml(currentBuffer)}</span>`;
-                            currentBuffer = '';
-                        }
-                        inString = true;
-                        stringChar = char;
-                        currentBuffer += char;
-                        continue;
-                    }
-                    if (char === '[' || char === ']' || char === ';') {
-                        if (currentBuffer.length > 0) {
-                            segmentHtml += `<span style="${defaultStyleCss}">${escapeHtml(currentBuffer)}</span>`;
-                            currentBuffer = '';
-                        }
-                        const style = (char === '[' || char === ']') ? bracketStyleCss : semicolonStyleCss;
-                        segmentHtml += `<span style="${style}">${escapeHtml(char)}</span>`;
-                        continue;
-                    }
-                    currentBuffer += char;
-                }
-                if (currentBuffer.length > 0) {
-                    segmentHtml += `<span style="${defaultStyleCss}">${escapeHtml(currentBuffer)}</span>`;
-                }
-                return segmentHtml;
-            }
-            return {
-                highlight: highlight
-            };
-        })();
-
-        function copyCode(buttonElement) {
-            const preElement = buttonElement.previousElementSibling;
-            if (!preElement || preElement.tagName !== 'PRE') {
-                console.error("Could not find <pre> element to copy.");
-                return;
-            }
-            const codeToCopy = preElement.textContent || "";
-            navigator.clipboard.writeText(codeToCopy).then(() => {
-                const originalHTML = buttonElement.innerHTML;
-                buttonElement.innerHTML = `<i class="fa-solid fa-check mr-2"></i>Copied!`;
-                setTimeout(() => {
-                    buttonElement.innerHTML = originalHTML;
-                }, 2000);
-            }).catch(err => {
-                console.error("Failed to copy code: ", err);
-                alert("Failed to copy code.");
-            });
-        }
-
-        function showTab(tabId, event) {
-            document.querySelectorAll('.code-tab').forEach(el => el.classList.add('is-hidden'));
-            document.getElementById(tabId).classList.remove('is-hidden');
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-        }
-        document.addEventListener('D
