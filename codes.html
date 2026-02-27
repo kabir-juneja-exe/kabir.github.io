@@ -17,9 +17,10 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* --- SYNCED NAVIGATION --- */
+        /* --- NAVIGATION HEADER --- */
         .profile-header {
             position: absolute;
             top: 20px;
@@ -29,7 +30,13 @@
             gap: 12px;
             z-index: 10;
         }
-        .avatar-small { width: 50px; height: 50px; border-radius: 50%; border: 2px solid white; }
+        .avatar-small { 
+            width: 50px; 
+            height: 50px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 2px solid white; 
+        }
         .username-top { font-weight: bold; font-size: 1.1rem; }
 
         .menu-btn {
@@ -41,15 +48,18 @@
             display: flex;
             flex-direction: column;
             gap: 6px;
+            align-items: flex-end;
         }
         .line { height: 3px; background-color: white; border-radius: 2px; transition: 0.3s; }
         .line-1 { width: 35px; } .line-2 { width: 25px; } .line-3 { width: 15px; }
 
+        /* --- SIDEBAR --- */
         .sidebar {
             position: fixed;
             top: 0; right: -250px;
             width: 250px; height: 100%;
             background-color: #1a1a1a;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.5);
             transition: 0.4s ease;
             z-index: 1000;
             padding-top: 80px;
@@ -57,12 +67,26 @@
             flex-direction: column;
         }
         .sidebar.active { right: 0; }
-        .sidebar a { padding: 15px 30px; text-decoration: none; color: #bbb; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .sidebar a { 
+            padding: 15px 30px; 
+            text-decoration: none; 
+            color: #bbb; 
+            font-size: 1.1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05); 
+        }
+        .sidebar a:hover { color: white; background: rgba(255,255,255,0.1); }
 
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; z-index: 999; }
+        .overlay { 
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.5); 
+            display: none; 
+            z-index: 999; 
+        }
         .overlay.active { display: block; }
 
-        /* --- GRID LAYOUT --- */
+        /* --- GRID CONTAINER --- */
         .container {
             margin-top: 100px;
             width: 95%;
@@ -70,20 +94,28 @@
             text-align: center;
         }
 
-        h1 { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; margin-bottom: 50px; }
+        h1 { 
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 2.5rem; 
+            margin-bottom: 50px; 
+            letter-spacing: 2px;
+        }
 
         .codes-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 in a row for PC */
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
+            align-items: stretch;
         }
 
-        /* Responsive: 1 column for mobile */
-        @media (max-width: 900px) {
+        @media (max-width: 950px) {
+            .codes-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 650px) {
             .codes-grid { grid-template-columns: 1fr; }
         }
 
-        /* --- BOX STYLING (MATCHING IMAGE) --- */
+        /* --- BOX STYLING --- */
         .code-box {
             background-color: #0f0f0f;
             border-radius: 24px;
@@ -92,24 +124,32 @@
             border: 1px solid #1e1e1e;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            transition: transform 0.3s;
+        }
+
+        .code-box:hover { transform: translateY(-5px); border-color: #3e3e3e; }
+
+        .title-area {
+            flex-grow: 1;
+            margin-bottom: 15px;
         }
 
         .code-box h2 {
             margin: 0;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: #ffffff;
-            line-height: 1.2;
+            line-height: 1.3;
         }
 
         .script-tag {
-            color: #7289da; /* Blue color from image */
+            color: #7289da;
             font-weight: 500;
-            font-size: 1.1rem;
+            font-size: 1rem;
             display: flex;
             align-items: center;
             gap: 8px;
+            margin-bottom: 25px;
         }
 
         .view-btn {
@@ -123,6 +163,7 @@
             font-size: 1.1rem;
             border: 1px solid #2a2a2a;
             transition: 0.3s;
+            margin-top: auto;
         }
 
         .view-btn:hover {
@@ -130,14 +171,27 @@
             border-color: #ffffff;
         }
 
-        /* --- FOOTER SOCIALS --- */
+        /* --- FOOTER & TILTED ICON --- */
         .footer-socials {
             margin-top: 60px;
             display: flex;
             gap: 35px;
             justify-content: center;
         }
-        .social-icon { color: #bbb; font-size: 2.2rem; transition: 0.3s; }
+        .social-icon { 
+            color: #bbb; 
+            font-size: 2.2rem; 
+            transition: 0.3s; 
+            text-decoration: none;
+            display: inline-block;
+        }
+        .social-icon:hover { color: white; transform: scale(1.1); }
+        
+        .tilt-icon { 
+            transform: rotate(-35deg); 
+            display: inline-block;
+        }
+
         .copyright { margin-top: 40px; color: #bbb; font-size: 0.9rem; padding-bottom: 30px; }
     </style>
 </head>
@@ -169,37 +223,49 @@
         <div class="codes-grid">
             
             <div class="code-box">
-                <h2>Bitcoin Price Checker Code</h2>
+                <div class="title-area">
+                    <h2>Bitcoin Price Checker Code</h2>
+                </div>
                 <div class="script-tag"><i class="fas fa-code"></i> BDScript 2</div>
                 <a href="my_codes/btccode.html" class="view-btn">View Snippet</a>
             </div>
 
             <div class="code-box">
-                <h2>HEX Role Code</h2>
+                <div class="title-area">
+                    <h2>HEX Role Code</h2>
+                </div>
                 <div class="script-tag"><i class="fas fa-code"></i> BDScript 2</div>
                 <a href="my_codes/hexcode.html" class="view-btn">View Snippet</a>
             </div>
 
             <div class="code-box">
-                <h2>Giveaway Code</h2>
+                <div class="title-area">
+                    <h2>Giveaway Code</h2>
+                </div>
                 <div class="script-tag"><i class="fas fa-code"></i> BDScript 2</div>
                 <a href="my_codes/gwcode.html" class="view-btn">View Snippet</a>
             </div>
 
             <div class="code-box">
-                <h2>Welcome Message (with card)</h2>
+                <div class="title-area">
+                    <h2>Welcome Message (with card)</h2>
+                </div>
                 <div class="script-tag"><i class="fas fa-code"></i> BDScript 2</div>
                 <a href="my_codes/welcomecode.html" class="view-btn">View Snippet</a>
             </div>
 
             <div class="code-box">
-                <h2>Whois Code</h2>
+                <div class="title-area">
+                    <h2>Whois Code</h2>
+                </div>
                 <div class="script-tag"><i class="fas fa-code"></i> BDScript 2</div>
                 <a href="my_codes/whoiscode.html" class="view-btn">View Snippet</a>
             </div>
 
             <div class="code-box">
-                <h2>Container Ticket System Code</h2>
+                <div class="title-area">
+                    <h2>Container Ticket System Code</h2>
+                </div>
                 <div class="script-tag"><i class="fas fa-code"></i> BDScript 2</div>
                 <a href="my_codes/tickercode.html" class="view-btn">View Snippet</a>
             </div>
@@ -209,7 +275,7 @@
         <div class="footer-socials">
             <a href="https://discord.gg/void" class="social-icon"><i class="fa-brands fa-discord"></i></a>
             <a href="mailto:kabir0juneja@gmail.com" class="social-icon"><i class="fa-solid fa-envelope"></i></a>
-            <a href="https://guns.lol/kabirjuneja" class="social-icon"><i class="fa-solid fa-gun"></i></a>
+            <a href="https://guns.lol/kabirjuneja" class="social-icon"><i class="fa-solid fa-gun tilt-icon"></i></a>
         </div>
         <div class="copyright">All Rights Reserved by Kabir Juneja</div>
     </div>
@@ -221,5 +287,4 @@
         }
     </script>
 </body>
-                                            </html>
-                                            
+</html>
