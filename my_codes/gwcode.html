@@ -200,7 +200,7 @@
 
     <div class="container">
         <h1>Bitcoin Price Checker Code (BDScript 2)</h1>
-        <p class="description">A Container/Embed Bitcoin Price Checker Code by "kabir.exe.". Usage `.btc {currency}`</p>
+        <p class="description">Variables - 1. "giveawayPrize" (value= ) 2. "giveawayParticipants" (value= ) . A Container Giveaway Code by "kabir.exe.". use ?gw <price> to host click the end button to end.</price></p>
 
         <div class="tab-container">
             <button class="tab-btn active" onclick="switchTab('embed', this)">Main Code (?gw <price>)</button>
@@ -229,18 +229,18 @@ $c[Count participants minus dummy entry]
 $var[participantCount;$sub[$getTextSplitLength;1]]
 
 $addContainer[gw;#000000]
-$addTextDisplay[## <a:rollingstar:1421427194185515081> $getServerVar[giveawayPrize] <a:rollingstar:1421427194185515081>;gw]
+$addTextDisplay[## ✨ $getServerVar[giveawayPrize] ✨]
 $addSeparator[true;Small;gw]
-$addTextDisplay[<:dots:1474755547650854953> **Winners:** 1
-<:dots:1474755547650854953> **Ends:** Anytime
-<:dots:1474755547650854953> **Hosted by:** <@$authorID>;gw]
+$addTextDisplay[✴️ **Winners:** 1
+✴️ **Ends:** Anytime
+✴️ **Hosted by:** <@$authorID>;gw]
 $addSeparator[true;Small;gw]
 $addActionRow[gwr;gw]
-$addButtonCV2[join_giveaway;;success;false;<a:giveaways:1474308584090108015>;gwr]
+$addButtonCV2[join_giveaway;;success;false;🎉;gwr]
 $addButtonCV2[pick_winner-$authorID;End;secondary;false;;gwr]
-$addButtonCV2[part;;primary;false;<:membericon:1474756047167033405>;gwr]
+$addButtonCV2[part;;primary;false;👤;gwr]
 $addSeparator[true;Small;gw]
-$addTextDisplay[-# Click <a:giveaways:1474308584090108015> to participate!;gw]
+$addTextDisplay[-# Click 🎉 to participate!;gw]
 
 $endif</pre>
             </div>
@@ -274,18 +274,18 @@ $c[Count participants minus dummy entry]
 $var[participantCount;$sub[$getTextSplitLength;1]]
 
 $addContainer[gw;#000000]
-$addTextDisplay[## <a:rollingstar:1421427194185515081> $getServerVar[giveawayPrize] <a:rollingstar:1421427194185515081>;gw]
+$addTextDisplay[## ✨ $getServerVar[giveawayPrize] ✨]
 $addSeparator[true;Small;gw]
-$addTextDisplay[<:dots:1474755547650854953> **Winners:** 1
-<:dots:1474755547650854953> **Ends:** Anytime
-<:dots:1474755547650854953> **Hosted by:** <@$authorID>;gw]
+$addTextDisplay[✴️ **Winners:** 1
+✴️ **Ends:** Anytime
+✴️ **Hosted by:** <@$authorID>;gw]
 $addSeparator[true;Small;gw]
 $addActionRow[gwr;gw]
-$addButtonCV2[join_giveaway;;success;false;<a:giveaways:1474308584090108015>;gwr]
+$addButtonCV2[join_giveaway;;success;false;🎉;gwr]
 $addButtonCV2[pick_winner-$authorID;End;secondary;false;;gwr]
-$addButtonCV2[part;;primary;false;<:membericon:1474756047167033405>;gwr]
+$addButtonCV2[part;;primary;false;👤;gwr]
 $addSeparator[true;Small;gw]
-$addTextDisplay[-# Click <a:giveaways:1474308584090108015> to participate!;gw]
+$addTextDisplay[-# Click 🎉 to participate!;gw]
 
 $endif`,
             
@@ -325,10 +325,10 @@ $endif
 $elseif[$customID==part]
 $ephemeral
 $addContainer[part;#000000]
-$addTextDisplay[<:membericon:1474756047167033405> Giveaway Participants;part]
+$addTextDisplay[👤 Giveaway Participants;part]
 $addSeparator[true;Small;part]
-$addTextDisplay[<:dots:1474755547650854953> <@$replaceText[$getServerVar[giveawayParticipants];\;;>
-<:dots:1474755547650854953> <@]1459638598788710541>;part]
+$addTextDisplay[✴️ <@$replaceText[$getServerVar[giveawayParticipants];\;;>
+✴️ <@];part]
 
 $elseif[$customID==pick_winner-$authorID]
 
@@ -353,18 +353,18 @@ $catch
 $endtry
 
 $addContainer[gw;#000000]
-$addTextDisplay[## <a:rollingstar:1421427194185515081> $getServerVar[giveawayPrize] <a:rollingstar:1421427194185515081>;gw]
+$addTextDisplay[## ✨ $getServerVar[giveawayPrize] ✨;gw]
 $addSeparator[true;Small;gw]
-$addTextDisplay[<:dots:1474755547650854953> **Winners:** <@$var[winner]>
-<:dots:1474755547650854953> **Ended:** <t:$sum[$getTimestamp;1]:R>
-<:dots:1474755547650854953> **Hosted by:** <@$authorID>;gw]
+$addTextDisplay[✴️ **Winners:** <@$var[winner]>
+✴️ **Ended:** <t:$sum[$getTimestamp;1]:R>
+✴️ **Hosted by:** <@$authorID>;gw]
 $addSeparator[true;Small;gw]
 $addActionRow[gwr;gw]
-$addButtonCV2[join_giveaway;;success;true;<a:giveaways:1474308584090108015>;gwr]
+$addButtonCV2[join_giveaway;;success;true;🎉;gwr]
 $addButtonCV2[pick_winner-$authorID;End;secondary;true;;gwr]
-$addButtonCV2[part;;primary;false;<:membericon:1474756047167033405>;gwr]
+$addButtonCV2[part;;primary;false;👤;gwr]
 $addSeparator[true;Small;gw]
-$addTextDisplay[-# Click <a:giveaways:1474308584090108015> to participate!;gw]
+$addTextDisplay[-# Click 🎉 to participate!;gw]
 
 
 $c[Check if winner exists before sending DM]
