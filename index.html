@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sha?dow | Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;600&family=Courier+Prime&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #0a0a0a;
-            --accent: #ffffff;
+            --accent: #00f7ff;
             --text-main: #e0e0e0;
             --text-dim: #888888;
             --card-bg: #111111;
@@ -44,14 +44,14 @@
         }
         .nav-logo { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 700; letter-spacing: 2px; text-decoration: none; color: white; }
         .nav-links { display: flex; gap: 25px; }
-        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.9rem; transition: 0.3s; cursor: pointer; }
+        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.9rem; transition: 0.3s; cursor: pointer; font-family: 'Orbitron', sans-serif; }
         .nav-links a:hover { color: white; }
 
-        /* --- SECTION SPACING & REVEAL --- */
+        /* --- SECTION LOGIC --- */
         section {
-            min-height: 100vh; /* Extends height for each section */
+            min-height: 100vh;
             width: 100%;
-            max-width: 800px;
+            max-width: 900px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -61,20 +61,62 @@
             transform: translateY(40px);
             transition: all 0.8s ease-out;
         }
+        section.visible { opacity: 1; transform: translateY(0); }
 
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
+        /* --- HERO SECTION (NEW LAYOUT) --- */
+        .hero-container {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            text-align: left;
         }
-
-        /* --- HERO (Section 1) --- */
-        .avatar-main { width: 130px; height: 130px; border-radius: 50%; border: 2px solid var(--border); padding: 5px; margin-bottom: 25px; }
-        .hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 8vw, 3.5rem); margin: 10px 0; }
-        .status-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--card-bg); padding: 8px 18px; border-radius: 20px; border: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); margin-bottom: 25px; }
+        .avatar-main { 
+            width: 150px; height: 150px; 
+            border-radius: 50%; 
+            border: 2px solid var(--border); 
+            padding: 5px;
+        }
+        .hero-text h1 { 
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 3rem; 
+            margin: 0 0 10px 0; 
+            color: white;
+        }
+        .status-badge { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 8px; 
+            background: var(--card-bg); 
+            padding: 6px 15px; 
+            border-radius: 20px; 
+            border: 1px solid var(--border); 
+            font-size: 0.8rem; 
+            color: var(--text-dim);
+        }
         .dot { width: 8px; height: 8px; border-radius: 50%; background: #555; }
         .dot.online { background: #23a55a; box-shadow: 0 0 10px #23a55a; }
 
-        /* --- CODES (Section 2) --- */
+        /* --- ABOUT GRID --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+        }
+        .about-card {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 16px;
+            text-align: left;
+            border: 1px solid var(--border);
+            font-family: 'Courier Prime', monospace;
+            transition: 0.3s;
+        }
+        .about-card:hover { border-color: var(--accent); transform: scale(1.02); }
+        .about-card h3 { margin-top: 0; color: var(--accent); font-size: 1.1rem; text-transform: uppercase; }
+        .about-card p { color: #e0e0e0; line-height: 1.5; font-size: 0.9rem; margin-bottom: 0; }
+
+        /* --- CODES GRID --- */
         .section-title { font-family: 'Orbitron', sans-serif; font-size: 2rem; margin-bottom: 40px; align-self: flex-start; }
         .codes-grid {
             display: grid;
@@ -93,35 +135,25 @@
         }
         .code-card:hover { border-color: white; background: #161616; transform: translateY(-5px); }
         .code-card h3 { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; margin: 0 0 10px 0; }
-        .code-card p { color: var(--text-dim); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+        .code-card p { color: var(--text-dim); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- CONTACT (Section 3) --- */
-        .contact-form { width: 100%; }
+        /* --- CONTACT --- */
         form { background: var(--card-bg); padding: 40px; border-radius: 20px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 20px; width: 100%; }
-        input, textarea { background: #0a0a0a; border: 1px solid var(--border); padding: 15px; border-radius: 10px; color: white; font-family: 'Inter', sans-serif; outline: none; transition: 0.3s; }
-        input:focus, textarea:focus { border-color: white; }
+        input, textarea { background: #0a0a0a; border: 1px solid var(--border); padding: 15px; border-radius: 10px; color: white; font-family: 'Inter', sans-serif; outline: none; }
         .submit-btn { background: white; color: black; border: none; padding: 15px; border-radius: 10px; font-weight: bold; font-family: 'Orbitron', sans-serif; cursor: pointer; transition: 0.3s; }
-        .submit-btn:hover { background: #bbb; }
 
         /* --- FOOTER --- */
-        .footer {
-            width: 100%;
-            padding: 60px 20px;
-            text-align: center;
-            opacity: 0;
-            transition: 1s ease;
-        }
+        .footer { width: 100%; padding: 60px 20px; text-align: center; opacity: 0; transition: 1s ease; }
         .footer.visible { opacity: 1; }
         .social-icons { display: flex; gap: 30px; justify-content: center; margin-bottom: 25px; }
         .social-icons a { color: var(--text-dim); font-size: 1.8rem; transition: 0.3s; }
         .social-icons a:hover { color: white; transform: scale(1.2); }
         .tilt { transform: rotate(-35deg); display: inline-block; }
-        .copyright { font-size: 0.8rem; color: #444; letter-spacing: 1px; }
 
-        @media (max-width: 650px) {
-            .codes-grid { grid-template-columns: 1fr; }
-            .nav-header { padding: 20px; }
-            section { padding: 80px 20px; }
+        @media (max-width: 768px) {
+            .hero-container { flex-direction: column; text-align: center; }
+            .about-grid, .codes-grid { grid-template-columns: 1fr; }
+            .hero-text h1 { font-size: 2.2rem; }
         }
     </style>
 </head>
@@ -130,21 +162,48 @@
     <nav class="nav-header">
         <a href="#" class="nav-logo">SHA?DOW</a>
         <div class="nav-links">
+            <a onclick="scrollToSection('about-section')">About</a>
             <a onclick="scrollToSection('codes-section')">Codes</a>
             <a onclick="scrollToSection('contact-section')">Contact</a>
         </div>
     </nav>
 
     <section id="profile-section">
-        <img src="https://cdn.discordapp.com/avatars/1301883723247124521/4793f5066c0ee12d60df0414b57fe1ee.png" class="avatar-main">
-        <div class="status-badge">
-            <div id="status-dot" class="dot"></div>
-            <span id="status-text">Connecting...</span>
+        <div class="hero-container">
+            <img src="https://cdn.discordapp.com/avatars/1301883723247124521/4793f5066c0ee12d60df0414b57fe1ee.png" class="avatar-main">
+            <div class="hero-text">
+                <h1>Sha?dow</h1>
+                <div class="status-badge">
+                    <div id="status-dot" class="dot"></div>
+                    <span id="status-text">Connecting...</span>
+                </div>
+                <p style="color: var(--text-dim); margin-top: 15px; line-height: 1.6;">
+                    Developer and Designer focusing on aesthetic digital experiences.
+                </p>
+            </div>
         </div>
-        <h1>Hello, I'm Sha?dow</h1>
-        <p style="color: var(--text-dim); font-size: 1.2rem; text-align: center; max-width: 500px; line-height: 1.6;">
-            Developer & Designer. Crafting futuristic digital experiences and advanced Discord systems.
-        </p>
+    </section>
+
+    <section id="about-section">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>Who am I?</h3>
+                <p>I am a developer focused on creating unique, aesthetic digital experiences. I love dark themes and clean UI design.</p>
+            </div>
+            <div class="about-card">
+                <h3>My Skills</h3>
+                <p>Proficient in modern web technologies including HTML, CSS, and JS, with a passion for Discord community tools.</p>
+            </div>
+            <div class="about-card">
+                <h3>Project Goals</h3>
+                <p>My aim is to push the boundaries of visual striking and interactive link-in-bio style pages.</p>
+            </div>
+            <div class="about-card">
+                <h3>Community</h3>
+                <p>Active in various developer communities, building open-source templates and helping others with UI problems.</p>
+            </div>
+        </div>
     </section>
 
     <section id="codes-section">
@@ -166,27 +225,17 @@
                 <p><i class="fas fa-code"></i> BDFD</p>
                 <h3>Welcome Cards</h3>
             </a>
-            <a href="#" class="code-card">
-                <p><i class="fas fa-code"></i> BDFD</p>
-                <h3>Whois Module</h3>
-            </a>
-            <a href="#" class="code-card">
-                <p><i class="fas fa-code"></i> BDFD</p>
-                <h3>Ticket System</h3>
-            </a>
         </div>
     </section>
 
     <section id="contact-section">
         <h2 class="section-title">Contact Me</h2>
-        <div class="contact-form">
-            <form action="https://formspree.io/f/xojnbeyb" method="POST">
-                <input type="text" name="name" placeholder="Full Name" required>
-                <input type="email" name="email" placeholder="Email Address" required>
-                <textarea name="message" rows="5" placeholder="Your Message..." required></textarea>
-                <button type="submit" class="submit-btn">SEND MESSAGE</button>
-            </form>
-        </div>
+        <form action="https://formspree.io/f/xojnbeyb" method="POST">
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <textarea name="message" rows="5" placeholder="Your Message..." required></textarea>
+            <button type="submit" class="submit-btn">SEND MESSAGE</button>
+        </form>
     </section>
 
     <footer class="footer" id="footer">
@@ -195,28 +244,25 @@
             <a href="mailto:kabir0juneja@gmail.com"><i class="fa-solid fa-envelope"></i></a>
             <a href="https://guns.lol/kabirjuneja"><i class="fa-solid fa-gun tilt"></i></a>
         </div>
-        <p class="copyright">© 2026 KABIR JUNEJA. ALL RIGHTS RESERVED.</p>
+        <p style="color: #444; font-size: 0.8rem; letter-spacing: 1px;">© 2026 KABIR JUNEJA. ALL RIGHTS RESERVED.</p>
     </footer>
 
     <script>
-        // --- Navigation Scroll Logic ---
+        // Scroll Logic
         function scrollToSection(id) {
-            const element = document.getElementById(id);
-            element.scrollIntoView({ behavior: 'smooth' });
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
 
-        // --- Scroll Reveal Logic ---
+        // Reveal Logic
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
-        }, { threshold: 0.15 });
+        }, { threshold: 0.1 });
 
         document.querySelectorAll('section, footer').forEach(el => observer.observe(el));
 
-        // --- Discord Status Logic ---
+        // Status Logic
         const discordID = "1301883723247124521";
         async function updateStatus() {
             try {
@@ -224,11 +270,11 @@
                 const { data } = await response.json();
                 const dot = document.getElementById('status-dot');
                 const text = document.getElementById('status-text');
-                if (data.discord_status === "online") { dot.className = "dot online"; text.innerText = "Online & Coding"; }
-                else if (data.discord_status === "dnd") { dot.className = "dot online"; dot.style.background = "#ed4245"; text.innerText = "Do Not Disturb"; }
-                else if (data.discord_status === "idle") { dot.className = "dot online"; dot.style.background = "#faa61a"; text.innerText = "Away from keyboard"; }
-                else { dot.className = "dot"; text.innerText = "Currently Offline"; }
-            } catch (e) { console.error("Status error"); }
+                if (data.discord_status === "online") { dot.className = "dot online"; text.innerText = "Online"; }
+                else if (data.discord_status === "dnd") { dot.className = "dot online"; dot.style.background = "#ed4245"; text.innerText = "DND"; }
+                else if (data.discord_status === "idle") { dot.className = "dot online"; dot.style.background = "#faa61a"; text.innerText = "Idle"; }
+                else { dot.className = "dot"; text.innerText = "Offline"; }
+            } catch (e) { console.error("API Error"); }
         }
         updateStatus();
         setInterval(updateStatus, 30000);
