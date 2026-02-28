@@ -3,16 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Codes | Shadow</title>
+    <title>Codes | Sha?dow</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #0a0a0a;
+            --accent: #ffffff;
+            --text-main: #e0e0e0;
+            --text-dim: #888888;
+            --card-bg: #111111;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
         body {
-            background-color: #2c2c2c;
-            color: white;
-            font-family: 'Josefin Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
             margin: 0;
-            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -20,45 +28,43 @@
             overflow-x: hidden;
         }
 
-        /* --- NAVIGATION HEADER --- */
-        .profile-header {
-            position: absolute;
-            top: 20px;
-            left: 20px;
+        /* --- NAVIGATION (Synced with Home) --- */
+        .nav-header {
+            width: 100%;
+            max-width: 1100px;
+            padding: 30px 20px;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 12px;
-            z-index: 10;
-        }
-        .avatar-small { 
-            width: 50px; 
-            height: 50px; 
-            border-radius: 50%; 
-            object-fit: cover; 
-            border: 2px solid white; 
-        }
-        .username-top { font-weight: bold; font-size: 1.1rem; }
-
-        .menu-btn {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            cursor: pointer;
+            box-sizing: border-box;
             z-index: 1001;
+        }
+
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: white;
+        }
+
+        /* Hamburger for Mobile/Sidebar consistency */
+        .menu-btn {
+            cursor: pointer;
             display: flex;
             flex-direction: column;
             gap: 6px;
-            align-items: flex-end;
         }
-        .line { height: 3px; background-color: white; border-radius: 2px; transition: 0.3s; }
-        .line-1 { width: 35px; } .line-2 { width: 25px; } .line-3 { width: 15px; }
+        .line { height: 2px; background-color: white; border-radius: 2px; transition: 0.3s; }
+        .line-1 { width: 25px; } .line-2 { width: 18px; }
 
         /* --- SIDEBAR --- */
         .sidebar {
             position: fixed;
             top: 0; right: -250px;
             width: 250px; height: 100%;
-            background-color: #1a1a1a;
+            background-color: #0f0f0f;
             box-shadow: -5px 0 15px rgba(0,0,0,0.5);
             transition: 0.4s ease;
             z-index: 1000;
@@ -70,40 +76,38 @@
         .sidebar a { 
             padding: 15px 30px; 
             text-decoration: none; 
-            color: #bbb; 
-            font-size: 1.1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.05); 
+            color: var(--text-dim); 
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border); 
         }
-        .sidebar a:hover { color: white; background: rgba(255,255,255,0.1); }
+        .sidebar a:hover { color: white; background: rgba(255,255,255,0.05); }
 
         .overlay { 
-            position: fixed; 
-            top: 0; left: 0; 
+            position: fixed; top: 0; left: 0; 
             width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.5); 
-            display: none; 
-            z-index: 999; 
+            background: rgba(0,0,0,0.7); 
+            display: none; z-index: 999; 
         }
         .overlay.active { display: block; }
 
-        /* --- GRID CONTAINER --- */
+        /* --- CONTENT --- */
         .container {
-            margin-top: 100px;
+            margin-top: 40px;
             width: 95%;
             max-width: 1100px;
-            text-align: center;
+            text-align: left; /* Aligned left to match modern dev portfolios */
         }
 
-        h1 { font-family: 'Arimo', sans-serif; font-size: 2.5rem; margin-bottom: 10px; letter-spacing: 2px; }
-        .subtitle { color: #bbb; margin-bottom: 50px; font-size: 1.1rem; }
+        h1 { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; margin-bottom: 10px; }
+        .subtitle { color: var(--text-dim); margin-bottom: 50px; font-size: 1.1rem; }
 
-        }
-
+        /* --- GRID --- */
         .codes-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            align-items: stretch;
+            margin-bottom: 80px;
         }
 
         @media (max-width: 950px) {
@@ -113,170 +117,143 @@
             .codes-grid { grid-template-columns: 1fr; }
         }
 
-        /* --- BOX STYLING --- */
+        /* --- BENTO CARD STYLE --- */
         .code-box {
-            background-color: #0f0f0f;
-            border-radius: 24px;
-            padding: 30px;
-            text-align: left;
-            border: 1px solid #1e1e1e;
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid var(--border);
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s;
+            transition: 0.3s ease;
+            text-decoration: none;
+            color: inherit;
         }
 
-        .code-box:hover { transform: translateY(-5px); border-color: #3e3e3e; }
-
-        .title-area {
-            flex-grow: 1;
-            margin-bottom: 15px;
+        .code-box:hover { 
+            border-color: rgba(255,255,255,0.4); 
+            transform: translateY(-5px);
+            background-color: #161616;
         }
 
         .code-box h2 {
             margin: 0;
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
             color: #ffffff;
-            line-height: 1.3;
+            margin-bottom: 10px;
         }
 
         .script-tag {
-            color: #7289da;
-            font-weight: 500;
-            font-size: 1rem;
+            color: var(--text-dim);
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 25px;
+            gap: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
         }
 
-        .view-btn {
-            background-color: #1a1a1a;
+        .view-link {
+            font-size: 0.9rem;
+            font-weight: 600;
             color: white;
-            text-decoration: none;
-            text-align: center;
-            padding: 15px;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            border: 1px solid #2a2a2a;
-            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
             margin-top: auto;
         }
+        .view-link i { font-size: 0.8rem; transition: 0.3s; }
+        .code-box:hover .view-link i { transform: translateX(5px); }
 
-        .view-btn:hover {
-            background-color: #252525;
-            border-color: #ffffff;
-        }
-
-        /* --- FOOTER & TILTED ICON --- */
-        .footer-socials {
-            margin-top: 60px;
-            display: flex;
-            gap: 35px;
-            justify-content: center;
-        }
-        .social-icon { 
-            color: #bbb; 
-            font-size: 2.2rem; 
-            transition: 0.3s; 
-            text-decoration: none;
-            display: inline-block;
-        }
-        .social-icon:hover { color: white; transform: scale(1.1); }
-        
-        .tilt-icon { 
-            transform: rotate(-35deg); 
-            display: inline-block;
+        /* --- FOOTER --- */
+        .footer {
+            margin-top: auto;
+            padding: 40px;
+            text-align: center;
+            width: 100%;
         }
 
-        .copyright { margin-top: 40px; color: #bbb; font-size: 0.9rem; padding-bottom: 30px; }
+        .social-icons { display: flex; gap: 25px; justify-content: center; margin-bottom: 20px; }
+        .social-icons a { color: var(--text-dim); font-size: 1.5rem; transition: 0.3s; text-decoration: none; }
+        .social-icons a:hover { color: white; transform: scale(1.1); }
+        .tilt { transform: rotate(-35deg); display: inline-block; }
+
     </style>
 </head>
 <body>
 
-    <div class="profile-header">
-        <img src="https://cdn.discordapp.com/avatars/1301883723247124521/4793f5066c0ee12d60df0414b57fe1ee.png" class="avatar-small">
-        <span class="username-top">Kabir.exe.</span>
-    </div>
-
-    <div class="menu-btn" onclick="toggleSidebar()">
-        <div class="line line-1"></div>
-        <div class="line line-2"></div>
-        <div class="line line-3"></div>
-    </div>
+    <nav class="nav-header">
+        <a href="index.html" class="nav-logo">SHA?DOW</a>
+        <div class="menu-btn" onclick="toggleSidebar()">
+            <div class="line line-1"></div>
+            <div class="line line-2"></div>
+        </div>
+    </nav>
 
     <div class="sidebar" id="sidebar">
-        <a href="https://ikabir.vercel.app">Home</a>
-        <a href="codes">Codes</a>
-        <a href="about">About</a>
-        <a href="contact">Contact</a>
+        <a href="index.html">Home</a>
+        <a href="codes.html">Codes</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
     </div>
 
     <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
     <div class="container">
-        <h1>Codes</h1>
-        <p class="subtitle">All my BDFD Codes.</p>
+        <h1>Source Codes</h1>
+        <p class="subtitle">A collection of custom-built BDScript 2 snippets.</p>
+        
         <div class="codes-grid">
             
-            <div class="code-box">
-                <div class="title-area">
-                    <h2>Bitcoin Price Checker Code</h2>
-                </div>
-                <div class="script-tag"><i class="fas fa-code"></i> BDScript 2</div>
-                <a href="codes/btccode" class="view-btn">View Snippet</a>
-            </div>
+            <a href="codes/btccode" class="code-box">
+                <div class="script-tag"><i class="fas fa-microchip"></i> BDScript 2</div>
+                <h2>Bitcoin Price Checker</h2>
+                <div class="view-link">View Code <i class="fas fa-arrow-right"></i></div>
+            </a>
 
-            <div class="code-box">
-                <div class="title-area">
-                    <h2>HEX Role Code</h2>
-                </div>
-                <div class="script-tag"><i class="fas fa-code"></i> BDScript 2</div>
-                <a href="codes/hexcode" class="view-btn">View Snippet</a>
-            </div>
+            <a href="codes/hexcode" class="code-box">
+                <div class="script-tag"><i class="fas fa-microchip"></i> BDScript 2</div>
+                <h2>HEX Role System</h2>
+                <div class="view-link">View Code <i class="fas fa-arrow-right"></i></div>
+            </a>
 
-            <div class="code-box">
-                <div class="title-area">
-                    <h2>Giveaway Code</h2>
-                </div>
-                <div class="script-tag"><i class="fas fa-code"></i> BDScript 2</div>
-                <a href="codes/gwcode" class="view-btn">View Snippet</a>
-            </div>
+            <a href="codes/gwcode" class="code-box">
+                <div class="script-tag"><i class="fas fa-microchip"></i> BDScript 2</div>
+                <h2>Giveaway System</h2>
+                <div class="view-link">View Code <i class="fas fa-arrow-right"></i></div>
+            </a>
 
-            <div class="code-box">
-                <div class="title-area">
-                    <h2>Welcome Message (with card)</h2>
-                </div>
-                <div class="script-tag"><i class="fas fa-code"></i> BDScript 2</div>
-                <a href="codes/welcomecode" class="view-btn">View Snippet</a>
-            </div>
+            <a href="codes/welcomecode" class="code-box">
+                <div class="script-tag"><i class="fas fa-microchip"></i> BDScript 2</div>
+                <h2>Welcome (Card)</h2>
+                <div class="view-link">View Code <i class="fas fa-arrow-right"></i></div>
+            </a>
 
-            <div class="code-box">
-                <div class="title-area">
-                    <h2>Whois Code</h2>
-                </div>
-                <div class="script-tag"><i class="fas fa-code"></i> BDScript 2</div>
-                <a href="codes/whoiscode" class="view-btn">View Snippet</a>
-            </div>
+            <a href="codes/whoiscode" class="code-box">
+                <div class="script-tag"><i class="fas fa-microchip"></i> BDScript 2</div>
+                <h2>Whois Info</h2>
+                <div class="view-link">View Code <i class="fas fa-arrow-right"></i></div>
+            </a>
 
-            <div class="code-box">
-                <div class="title-area">
-                    <h2>Container Ticket System Code</h2>
-                </div>
-                <div class="script-tag"><i class="fas fa-code"></i> BDScript 2</div>
-                <a href="codes/ticketcode" class="view-btn">View Snippet</a>
-            </div>
+            <a href="codes/ticketcode" class="code-box">
+                <div class="script-tag"><i class="fas fa-microchip"></i> BDScript 2</div>
+                <h2>Container Tickets</h2>
+                <div class="view-link">View Code <i class="fas fa-arrow-right"></i></div>
+            </a>
 
         </div>
-
-        <div class="footer-socials">
-            <a href="https://discord.gg/void" class="social-icon"><i class="fa-brands fa-discord"></i></a>
-            <a href="mailto:kabir0juneja@gmail.com" class="social-icon"><i class="fa-solid fa-envelope"></i></a>
-            <a href="https://guns.lol/kabirjuneja" class="social-icon"><i class="fa-solid fa-gun tilt-icon"></i></a>
-        </div>
-        <div class="copyright">All Rights Reserved by Kabir Juneja</div>
     </div>
+
+    <footer class="footer">
+        <div class="social-icons">
+            <a href="https://discord.gg/void"><i class="fa-brands fa-discord"></i></a>
+            <a href="mailto:kabir0juneja@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://guns.lol/kabirjuneja"><i class="fa-solid fa-gun tilt"></i></a>
+        </div>
+        <p style="font-size: 0.8rem; color: #555;">© 2026 Kabir Juneja. All Rights Reserved.</p>
+    </footer>
 
     <script>
         function toggleSidebar() {
