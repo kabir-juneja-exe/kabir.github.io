@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giveaway System | Sha?dow</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;600&family=Courier+Prime&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --accent: #00f7ff;
+            --text-main: #e0e0e0;
+            --text-dim: #888888;
+            --card-bg: #111111;
+            --border: rgba(255, 255, 255, 0.1);
+            --grad: linear-gradient(90deg, #00d2ff 0%, #3a7bd5 100%);
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* --- NAVIGATION --- */
+        .nav-header {
+            width: 100%;
+            max-width: 1000px;
+            padding: 30px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo { 
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            letter-spacing: 2px; 
+            text-decoration: none; 
+            color: white; 
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .back-link i {
+            font-size: 0.8rem;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 3px;
+            background: var(--grad);
+            border-radius: 2px;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+            transform: translateX(-3px);
+        }
+
+        /* --- CONTENT --- */
+        .container {
+            margin-top: 20px;
+            max-width: 850px;
+            width: 95%;
+            text-align: left;
+        }
+
+        h1 { 
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 2.2rem; 
+            margin-bottom: 10px;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .description { color: var(--text-dim); margin-bottom: 30px; font-size: 0.9rem; line-height: 1.6; }
+        code { background: #222; padding: 2px 6px; border-radius: 4px; color: var(--accent); font-family: 'Courier Prime', monospace; }
+
+        /* --- TABS --- */
+        .tab-container { display: flex; gap: 10px; margin-bottom: 15px; }
+        .tab-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            padding: 10px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            transition: 0.3s;
+        }
+        .tab-btn.active {
+            border-color: #3a7bd5;
+            color: white;
+            background: rgba(58, 123, 213, 0.1);
+        }
+
+        /* --- CODE BOX --- */
+        .code-container {
+            position: relative;
+            background-color: #050505;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .code-header {
+            background: #111;
+            padding: 10px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .lang-label { font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+
+        .code-block { padding: 25px; overflow-x: auto; }
+        pre { 
+            margin: 0; 
+            font-family: 'Courier Prime', monospace; 
+            color: #e0e0e0; 
+            line-height: 1.6; 
+            white-space: pre-wrap; 
+            font-size: 0.9rem;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            padding: 5px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            font-family: 'Orbitron', sans-serif;
+            transition: 0.2s;
+        }
+        .copy-btn:hover { background: white; color: black; border-color: white; }
+
+        /* --- FOOTER --- */
+        .footer { padding: 60px 20px; text-align: center; margin-top: auto; }
+        .social-icons { display: flex; gap: 25px; justify-content: center; margin-bottom: 20px; }
+        .social-icons a { color: var(--text-dim); font-size: 1.5rem; transition: 0.3s; }
+        .social-icons a:hover { color: #00d2ff; }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-header">
+        <a href="index.html" class="nav-logo">SHA?DOW</a>
+        <div class="nav-links">
+            <a href="index.html" class="back-link">
+                <i class="fa-solid fa-chevron-left"></i> BACK
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Giveaway System</h1>
+        <p class="description">
+            Full-featured Container Giveaway System. Use <code>?gw [prize]</code> to start.<br>
+            Requires variables: <code>giveawayPrize</code> and <code>giveawayParticipants</code>.
+        </p>
+
+        <div class="tab-container">
+            <button class="tab-btn active" onclick="switchTab('embed', this)">Command Code</button>
+            <button class="tab-btn" onclick="switchTab('interaction', this)">$onInteraction</button>
+        </div>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="lang-label">BDScript 2</span>
+                <button class="copy-btn" onclick="copyCode()">Copy</button>
+            </div>
+            <div class="code-block">
+<pre id="code-content">$nomention
+$deletecommand
+$suppressErrors
+$onlyPerms[managemessages;You need perms]
+$onlyBotPerms[managemessages;I need perms]
+
+$if[$message==]
+Correct usage: !giveaway {prize}
+$else
+$c[Set dummy value so it's never empty]
+$setServerVar[giveawayParticipants;]
+$c[Store the prize]
+$setServerVar[giveawayPrize;$message]
+$textSplit[$getServerVar[giveawayParticipants];\;]
+$var[participantCount;$sub[$getTextSplitLength;1]]
+
+$addContainer[gw;#000000]
+$addTextDisplay[## ✨ $getServerVar[giveawayPrize] ✨]
+$addSeparator[true;Small;gw]
+$addTextDisplay[✴️ **Winners:** 1
+✴️ **Ends:** Anytime
+✴️ **Hosted by:** <@$authorID>;gw]
+$addSeparator[true;Small;gw]
+$addActionRow[gwr;gw]
+$addButtonCV2[join_giveaway;;success;false;🎉;gwr]
+$addButtonCV2[pick_winner-$authorID;End;secondary;false;;gwr]
+$addButtonCV2[part;;primary;false;👤;gwr]
+$addSeparator[true;Small;gw]
+$addTextDisplay[-# Click 🎉 to participate!;gw]
+
+$endif</pre>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="social-icons">
+            <a href="https://discord.gg/void"><i class="fa-brands fa-discord"></i></a>
+            <a href="mailto:kabir0juneja@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://guns.lol/kabirjuneja"><i class="fa-solid fa-gun tilt"></i></a>
+        </div>
+        <p style="color: #444; font-size: 0.75rem; letter-spacing: 1px;">© 2026 KABIR JUNEJA. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <script>
+        const codes = {
+            embed: `$nomention
+$deletecommand
+$suppressErrors
+$onlyPerms[managemessages;You need perms]
+$onlyBotPerms[managemessages;I need perms]
+
+$if[$message==]
+Correct usage: !giveaway {prize}
+$else
+$c[Set dummy value so it's never empty]
+$setServerVar[giveawayParticipants;]
+$c[Store the prize]
+$setServerVar[giveawayPrize;$message]
+$textSplit[$getServerVar[giveawayParticipants];\;]
+$var[participantCount;$sub[$getTextSplitLength;1]]
+
+$addContainer[gw;#000000]
+$addTextDisplay[## ✨ $getServerVar[giveawayPrize] ✨]
+$addSeparator[true;Small;gw]
+$addTextDisplay[✴️ **Winners:** 1
+✴️ **Ends:** Anytime
+✴️ **Hosted by:** <@$authorID>;gw]
+$addSeparator[true;Small;gw]
+$addActionRow[gwr;gw]
+$addButtonCV2[join_giveaway;;success;false;🎉;gwr]
+$addButtonCV2[pick_winner-$authorID;End;secondary;false;;gwr]
+$addButtonCV2[part;;primary;false;👤;gwr]
+$addSeparator[true;Small;gw]
+$addTextDisplay[-# Click 🎉 to participate!;gw]
+
+$endif`,
+            
+            interaction: `$nomention
+
+$if[$customID==join_giveaway]
+$removeButtons
+$ephemeral
+
+$if[$checkContains[$getServerVar[giveawayParticipants];$authorID]==false]
+$setServerVar[giveawayParticipants;$getServerVar[giveawayParticipants]$authorID\;]
+$textSplit[$getServerVar[giveawayParticipants];\;]
+$addContainer[gwp;#000000]
+$addTextDisplay[<@$authorID>, Successfully entered. Participants: \`$sub[$getTextSplitLength;1]\`;gwp]
+$else
+$setServerVar[giveawayParticipants;$replaceText[$getServerVar[giveawayParticipants];$authorID\;;]]
+$textSplit[$getServerVar[giveawayParticipants];\;]
+$description[<@$authorID> left. Entries left: \`$sub[$getTextSplitLength;1]\`]
+$color[#FF0000]
+$endif
+
+$elseif[$customID==part]
+$ephemeral
+$addContainer[part;#000000]
+$addTextDisplay[👤 Participants;part]
+$addSeparator[true;Small;part]
+$addTextDisplay[✴️ <@$replaceText[$getServerVar[giveawayParticipants];\;;>
+✴️ <@];part]
+
+$elseif[$customID==pick_winner-$authorID]
+$removeButtons
+$textSplit[$getServerVar[giveawayParticipants];\;]
+
+$if[$getTextSplitLength>1]
+$var[winnerIndex;$random[1;$getTextSplitLength]]
+$var[winner;$splitText[$var[winnerIndex]]]
+
+$addContainer[gw;#000000]
+$addTextDisplay[## ✨ $getServerVar[giveawayPrize] ✨;gw]
+$addSeparator[true;Small;gw]
+$addTextDisplay[✴️ **Winner:** <@$var[winner]>
+✴️ **Hosted by:** <@$authorID>;gw]
+
+$sendEmbedMessage[$dmChannelID[$var[winner]];;;;Congratulations! You won **$getServerVar[giveawayPrize]** in $serverName[$guildID]!;#FFFF00]
+$endif
+$endif`
+        };
+
+        function switchTab(type, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('code-content').innerText = codes[type];
+        }
+
+        function copyCode() {
+            const code = document.getElementById('code-content').innerText;
+            const btn = document.querySelector('.copy-btn');
+            navigator.clipboard.writeText(code).then(() => {
+                btn.innerText = 'Copied!';
+                setTimeout(() => { btn.innerText = 'Copy'; }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
