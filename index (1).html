@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Shadow</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Page Styling */
+        body {
+            background-color: #2c2c2c;
+            color: white;
+            font-family: 'Josefin Sans', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .profile-header {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .avatar-small {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+        }
+
+        .username-top { font-weight: bold; font-size: 1.1rem; }
+
+        /* Sidebar & Menu */
+        .menu-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            cursor: pointer;
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: flex-end;
+        }
+        .line { height: 3px; background-color: white; border-radius: 2px; transition: 0.3s; }
+        .line-1 { width: 35px; } .line-2 { width: 25px; } .line-3 { width: 15px; }
+
+        .sidebar {
+            position: fixed;
+            top: 0; right: -250px;
+            width: 250px; height: 100%;
+            background-color: #1a1a1a;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+            transition: 0.4s ease;
+            z-index: 1000;
+            padding-top: 80px;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar.active { right: 0; }
+        .sidebar a { padding: 15px 30px; text-decoration: none; color: #bbb; font-size: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        .sidebar a:hover { color: white; background: rgba(255,255,255,0.1); padding-left: 40px; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; z-index: 999; }
+        .overlay.active { display: block; }
+
+        .container { margin-top: 100px; width: 95%; max-width: 800px; text-align: center; }
+        h1 { font-family: 'Arimo', sans-serif; font-size: 2.5rem; margin-bottom: 10px; letter-spacing: 2px; }
+        .description { color: #bbb; margin-bottom: 50px; font-size: 1.1rem; }
+
+        /* --- DISCORD CARD --- */
+        .discord-card {
+            background-color: #111214;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            text-align: left;
+            border: 1px solid #ffffff;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.25);
+            position: relative;
+        }
+
+        .banner {
+            height: 120px;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://cdn.discordapp.com/banners/1301883723247124521/a_b91b0a63867f80ab6995a61b45642af4.gif');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .profile-section { padding: 16px; position: relative; }
+        .avatar-large-container { position: absolute; top: -45px; left: 20px; }
+        .avatar-large { width: 90px; height: 90px; border-radius: 50%; border: 6px solid #111214; background-color: #111214; }
+
+        .status-wrapper {
+            width: 26px;
+            height: 26px;
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            background-color: #111214;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .online-dot {
+            width: 16px;
+            height: 16px;
+            background-color: #23a55a;
+            border-radius: 50%;
+        }
+
+        .status-img { width: 100%; height: 100%; object-fit: contain; }
+
+        .profile-info { margin-top: 50px; background-color: #1a1b1e; padding: 16px; border-radius: 12px; }
+        .name-row { display: flex; align-items: center; gap: 8px; }
+        .name-row h2 { margin: 0; font-size: 1.5rem; color: #00f7ff; text-shadow: 0 0 10px rgba(0, 247, 255, 0.5); font-family: "Courier New", Courier, monospace; }
+        .username-tag { color: #b5bac1; font-size: 1rem; margin-bottom: 12px; }
+        .badges { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
+        .badge { width: 24px; height: 24px; object-fit: contain; }
+
+        /* --- FOOTER & TILT --- */
+        .footer-socials { margin-top: 40px; display: flex; gap: 35px; justify-content: center; }
+        .social-icon { color: #bbb; font-size: 2.2rem; transition: 0.3s; display: inline-block; text-decoration: none; }
+        .social-icon:hover { color: white; transform: scale(1.1); }
+        
+        .tilt-icon { 
+            transform: rotate(-35deg); 
+            display: inline-block;
+        }
+
+        .copyright { margin-top: 40px; color: #bbb; font-size: 0.9rem; padding-bottom: 30px; }
+    </style>
+</head>
+<body>
+
+    <div class="profile-header">
+        <img src="https://cdn.discordapp.com/avatars/1301883723247124521/4793f5066c0ee12d60df0414b57fe1ee.png?size=1024" class="avatar-small">
+        <span class="username-top">Kabir.exe.</span>
+    </div>
+
+    <div class="menu-btn" onclick="toggleSidebar()">
+        <div class="line line-1"></div>
+        <div class="line line-2"></div>
+        <div class="line line-3"></div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <a href="https://ikabir.vercel.app">Home</a>
+        <a href="codes">Codes</a>
+        <a href="about">About</a>
+        <a href="contact">Contact</a>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+    <div class="container">
+        <h1>Sha?dow</h1>
+        <p class="description">Developer and Designer</p>
+
+        <div class="discord-card">
+            <div class="banner"></div>
+            <div class="profile-section">
+                <div class="avatar-large-container">
+                    <img src="https://cdn.discordapp.com/avatars/1301883723247124521/4793f5066c0ee12d60df0414b57fe1ee.png?size=1024" class="avatar-large">
+                    <div id="status-container" class="status-wrapper">
+                        <div class="online-dot"></div>
+                    </div>
+                </div>
+
+                <div class="profile-info">
+                    <div class="name-row">
+                        <h2>Sha?dow</h2>
+                    </div>
+                    <div class="username-tag">kabir.exe.</div>
+
+                    <div class="badges">
+                        <img src="2502-nitro-bronze-nodot-background.png" class="badge">
+                        <img src="5946-discord-balance.png" class="badge">
+                        <img src="4390-evolving-badge-nitro-1-months.png" class="badge">
+                        <img src="92929-questbadge.png" class="badge">
+                        <img src="41827-orbs.png" class="badge">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-socials">
+            <a href="https://discord.gg/void" class="social-icon"><i class="fa-brands fa-discord"></i></a>
+            <a href="mailto:kabir0juneja@gmail.com" class="social-icon"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://guns.lol/kabirjuneja" class="social-icon"><i class="fa-solid fa-gun tilt-icon"></i></a>
+        </div>
+
+        <div class="copyright">All Rights Reserved by Kabir Juneja</div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+
+        const discordID = "1301883723247124521";
+        const statusContainer = document.getElementById('status-container');
+
+        const statusImages = {
+            idle: "https://cdn.discordapp.com/attachments/1424703458321367201/1476891925347827734/6054-idle.png?ex=69a2c64a&is=69a174ca&hm=0019a58a25b08052f267f1e3bb4aab04b7dacb711b43e04a8acf9629b4a0ca80&",
+            offline: "https://cdn.discordapp.com/attachments/1424703458321367201/1476891925909999627/7445_status_offline.png?ex=69a2c64a&is=69a174ca&hm=d27befd35c27e4e23d4d5bbaa39a76f00c032d6646b8e3adf58524244a938654&",
+            dnd: "https://cdn.discordapp.com/attachments/1424703458321367201/1476891925578776697/8310-dnd.png?ex=69a2c64a&is=69a174ca&hm=8089f78be9cb158abe6fd1be5535e294756084ea05e97c9b8d58796fe6fd6ba5&"
+        };
+
+        async function fetchStatus() {
+            try {
+                const response = await fetch(`https://api.lanyard.rest/v1/users/${discordID}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    const status = data.data.discord_status;
+                    
+                    if (status === 'online') {
+                        statusContainer.innerHTML = '<div class="online-dot"></div>';
+                    } else if (statusImages[status]) {
+                        statusContainer.innerHTML = `<img src="${statusImages[status]}" class="status-img">`;
+                    } else {
+                        statusContainer.innerHTML = `<img src="${statusImages.offline}" class="status-img">`;
+                    }
+                }
+            } catch (error) {
+                console.error("Lanyard Error:", error);
+            }
+        }
+
+        fetchStatus();
+        setInterval(fetchStatus, 15000);
+    </script>
+</body>
+</html>
