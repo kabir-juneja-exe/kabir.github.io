@@ -47,7 +47,6 @@
             color: white; 
         }
 
-        /* --- BACK BUTTON STYLING --- */
         .back-link {
             text-decoration: none;
             color: white;
@@ -79,12 +78,9 @@
             transition: 0.3s ease;
         }
 
-        .back-link:hover {
-            opacity: 0.8;
-            transform: translateX(-3px);
-        }
+        .back-link:hover { opacity: 0.8; transform: translateX(-3px); }
 
-        /* --- CONTENT CONTAINER --- */
+        /* --- CONTENT --- */
         .container {
             margin-top: 20px;
             max-width: 850px;
@@ -162,11 +158,13 @@
         }
         .copy-btn:hover { background: white; color: black; border-color: white; }
 
-        /* --- FOOTER --- */
+        /* --- FOOTER (Tilted Icon Sync) --- */
         .footer { padding: 60px 20px; text-align: center; margin-top: auto; }
         .social-icons { display: flex; gap: 25px; justify-content: center; margin-bottom: 20px; }
         .social-icons a { color: var(--text-dim); font-size: 1.5rem; transition: 0.3s; }
-        .social-icons a:hover { color: #00d2ff; }
+        .social-icons a:hover { color: #00d2ff; transform: scale(1.1); }
+        .tilt { transform: rotate(-35deg); display: inline-block; }
+
     </style>
 </head>
 <body>
@@ -226,6 +224,7 @@ $footerIcon[https://cdn.discordapp.com/attachments/1446064234877157509/144607006
         <div class="social-icons">
             <a href="https://discord.gg/void"><i class="fa-brands fa-discord"></i></a>
             <a href="mailto:kabir0juneja@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://guns.lol/kabirjuneja"><i class="fa-solid fa-gun tilt"></i></a>
         </div>
         <p style="color: #444; font-size: 0.75rem; letter-spacing: 1px;">© 2026 KABIR JUNEJA. ALL RIGHTS RESERVED.</p>
     </footer>
