@@ -1,4 +1,4 @@
-const DISCORD_ID = "799248479586615316";
+const DISCORD_ID = "1301883723247124521";
 
         async function fetchDiscord() {
             try {
