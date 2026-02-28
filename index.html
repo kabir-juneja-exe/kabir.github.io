@@ -16,6 +16,8 @@
             --border: rgba(255, 255, 255, 0.1);
         }
 
+        * { scroll-behavior: smooth; box-sizing: border-box; }
+
         body {
             background-color: var(--bg);
             color: var(--text-main);
@@ -24,152 +26,196 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
             overflow-x: hidden;
         }
 
         /* --- NAVIGATION --- */
         .nav-header {
+            position: fixed;
+            top: 0;
             width: 100%;
-            max-width: 800px;
+            max-width: 1000px;
             padding: 30px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-sizing: border-box;
+            z-index: 100;
+            background: linear-gradient(to bottom, var(--bg) 60%, transparent);
         }
         .nav-logo { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 700; letter-spacing: 2px; text-decoration: none; color: white; }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.9rem; transition: 0.3s; }
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.9rem; transition: 0.3s; cursor: pointer; }
         .nav-links a:hover { color: white; }
 
-        /* --- HERO SECTION --- */
-        .hero { margin-top: 60px; text-align: center; max-width: 600px; padding: 0 20px; }
-        .avatar-main { width: 120px; height: 120px; border-radius: 50%; border: 2px solid var(--border); padding: 5px; margin-bottom: 20px; }
-        h1 { font-family: 'Orbitron', sans-serif; font-size: 2.8rem; margin: 10px 0; letter-spacing: -1px; }
-        .status-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--card-bg); padding: 6px 15px; border-radius: 20px; border: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); margin-bottom: 20px; }
-        .dot { width: 8px; height: 8px; border-radius: 50%; background: #555; }
-        .dot.online { background: #23a55a; box-shadow: 0 0 8px #23a55a; }
-
-        /* --- MY CODES SECTION (NEW) --- */
-        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; margin: 80px 0 30px 0; width: 100%; max-width: 800px; text-align: left; padding: 0 20px; box-sizing: border-box; }
-        
-        .codes-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 2 columns for home page feel */
-            gap: 20px;
+        /* --- SECTION SPACING & REVEAL --- */
+        section {
+            min-height: 100vh; /* Extends height for each section */
             width: 100%;
             max-width: 800px;
-            padding: 0 20px;
-            box-sizing: border-box;
-            margin-bottom: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 20px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
         }
 
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HERO (Section 1) --- */
+        .avatar-main { width: 130px; height: 130px; border-radius: 50%; border: 2px solid var(--border); padding: 5px; margin-bottom: 25px; }
+        .hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 8vw, 3.5rem); margin: 10px 0; }
+        .status-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--card-bg); padding: 8px 18px; border-radius: 20px; border: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); margin-bottom: 25px; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: #555; }
+        .dot.online { background: #23a55a; box-shadow: 0 0 10px #23a55a; }
+
+        /* --- CODES (Section 2) --- */
+        .section-title { font-family: 'Orbitron', sans-serif; font-size: 2rem; margin-bottom: 40px; align-self: flex-start; }
+        .codes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+        }
         .code-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 20px;
+            border-radius: 18px;
+            padding: 25px;
             text-decoration: none;
             color: inherit;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            opacity: 0; /* For scroll reveal */
-            transform: translateY(30px);
+            transition: 0.3s;
         }
+        .code-card:hover { border-color: white; background: #161616; transform: translateY(-5px); }
+        .code-card h3 { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; margin: 0 0 10px 0; }
+        .code-card p { color: var(--text-dim); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        .code-card.reveal { opacity: 1; transform: translateY(0); }
-        .code-card:hover { border-color: rgba(255,255,255,0.4); transform: scale(1.02); background: #161616; }
-        .code-card h3 { font-family: 'Orbitron', sans-serif; font-size: 1rem; margin: 0 0 10px 0; color: #fff; }
-        .code-card p { color: var(--text-dim); font-size: 0.85rem; margin: 0; display: flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        /* --- CONTACT (Section 3) --- */
+        .contact-form { width: 100%; }
+        form { background: var(--card-bg); padding: 40px; border-radius: 20px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 20px; width: 100%; }
+        input, textarea { background: #0a0a0a; border: 1px solid var(--border); padding: 15px; border-radius: 10px; color: white; font-family: 'Inter', sans-serif; outline: none; transition: 0.3s; }
+        input:focus, textarea:focus { border-color: white; }
+        .submit-btn { background: white; color: black; border: none; padding: 15px; border-radius: 10px; font-weight: bold; font-family: 'Orbitron', sans-serif; cursor: pointer; transition: 0.3s; }
+        .submit-btn:hover { background: #bbb; }
 
-        /* --- CONTACT & FOOTER --- */
-        .contact-form { width: 100%; max-width: 800px; padding: 20px; box-sizing: border-box; margin-bottom: 40px; }
-        form { background: var(--card-bg); padding: 30px; border-radius: 16px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 15px; }
-        input, textarea { background: #0a0a0a; border: 1px solid var(--border); padding: 12px; border-radius: 8px; color: white; font-family: 'Inter', sans-serif; outline: none; }
-        input:focus { border-color: #fff; }
-        .submit-btn { background: white; color: black; border: none; padding: 12px; border-radius: 8px; font-weight: bold; font-family: 'Orbitron', sans-serif; cursor: pointer; transition: 0.3s; }
-        
-        .footer { padding: 40px; text-align: center; }
-        .social-icons { display: flex; gap: 25px; justify-content: center; margin-bottom: 20px; }
-        .social-icons a { color: var(--text-dim); font-size: 1.5rem; transition: 0.3s; }
-        .social-icons a:hover { color: white; transform: scale(1.1); }
+        /* --- FOOTER --- */
+        .footer {
+            width: 100%;
+            padding: 60px 20px;
+            text-align: center;
+            opacity: 0;
+            transition: 1s ease;
+        }
+        .footer.visible { opacity: 1; }
+        .social-icons { display: flex; gap: 30px; justify-content: center; margin-bottom: 25px; }
+        .social-icons a { color: var(--text-dim); font-size: 1.8rem; transition: 0.3s; }
+        .social-icons a:hover { color: white; transform: scale(1.2); }
         .tilt { transform: rotate(-35deg); display: inline-block; }
+        .copyright { font-size: 0.8rem; color: #444; letter-spacing: 1px; }
 
-        @media (max-width: 600px) {
+        @media (max-width: 650px) {
             .codes-grid { grid-template-columns: 1fr; }
-            h1 { font-size: 2rem; }
+            .nav-header { padding: 20px; }
+            section { padding: 80px 20px; }
         }
     </style>
 </head>
 <body>
 
     <nav class="nav-header">
-        <a href="index.html" class="nav-logo">SHA?DOW</a>
+        <a href="#" class="nav-logo">SHA?DOW</a>
         <div class="nav-links">
-            <a href="codes.html">Codes</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
+            <a onclick="scrollToSection('codes-section')">Codes</a>
+            <a onclick="scrollToSection('contact-section')">Contact</a>
         </div>
     </nav>
 
-    <section class="hero">
-        <img src="https://cdn.discordapp.com/avatars/1301883723247124521/4793f5066c0ee12d60df0414b57fe1ee.png" class="avatar-main" alt="Avatar">
+    <section id="profile-section">
+        <img src="https://cdn.discordapp.com/avatars/1301883723247124521/4793f5066c0ee12d60df0414b57fe1ee.png" class="avatar-main">
         <div class="status-badge">
             <div id="status-dot" class="dot"></div>
-            <span id="status-text">Fetching status...</span>
+            <span id="status-text">Connecting...</span>
         </div>
         <h1>Hello, I'm Sha?dow</h1>
-        <p style="color: var(--text-dim); line-height: 1.6;">Developer and Designer specializing in Bot Development and Web Aesthetics.</p>
+        <p style="color: var(--text-dim); font-size: 1.2rem; text-align: center; max-width: 500px; line-height: 1.6;">
+            Developer & Designer. Crafting futuristic digital experiences and advanced Discord systems.
+        </p>
     </section>
 
-    <h2 class="section-title">My Codes</h2>
-    <div class="codes-grid">
-        <a href="codes/btccode" class="code-card">
-            <p><i class="fas fa-code"></i> BDFD</p>
-            <h3>Bitcoin Price</h3>
-        </a>
-        <a href="codes/hexcode" class="code-card">
-            <p><i class="fas fa-code"></i> BDFD</p>
-            <h3>HEX Role</h3>
-        </a>
-        <a href="codes/gwcode" class="code-card">
-            <p><i class="fas fa-code"></i> BDFD</p>
-            <h3>Giveaway</h3>
-        </a>
-        <a href="codes/welcomecode" class="code-card">
-            <p><i class="fas fa-code"></i> BDFD</p>
-            <h3>Welcome Card</h3>
-        </a>
-        <a href="codes/whoiscode" class="code-card">
-            <p><i class="fas fa-code"></i> BDFD</p>
-            <h3>Whois Info</h3>
-        </a>
-        <a href="codes/ticketcode" class="code-card">
-            <p><i class="fas fa-code"></i> BDFD</p>
-            <h3>Ticket System</h3>
-        </a>
-    </div>
-
-    <section class="contact-form">
-        <h2 style="font-family: 'Orbitron'; margin-bottom: 20px;">Send a Message</h2>
-        <form action="https://formspree.io/f/xojnbeyb" method="POST">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" rows="4" placeholder="What's on your mind?" required></textarea>
-            <button type="submit" class="submit-btn">SEND</button>
-        </form>
+    <section id="codes-section">
+        <h2 class="section-title">My Codes</h2>
+        <div class="codes-grid">
+            <a href="#" class="code-card">
+                <p><i class="fas fa-code"></i> BDFD</p>
+                <h3>Bitcoin Tracker</h3>
+            </a>
+            <a href="#" class="code-card">
+                <p><i class="fas fa-code"></i> BDFD</p>
+                <h3>HEX Role Gen</h3>
+            </a>
+            <a href="#" class="code-card">
+                <p><i class="fas fa-code"></i> BDFD</p>
+                <h3>Giveaway System</h3>
+            </a>
+            <a href="#" class="code-card">
+                <p><i class="fas fa-code"></i> BDFD</p>
+                <h3>Welcome Cards</h3>
+            </a>
+            <a href="#" class="code-card">
+                <p><i class="fas fa-code"></i> BDFD</p>
+                <h3>Whois Module</h3>
+            </a>
+            <a href="#" class="code-card">
+                <p><i class="fas fa-code"></i> BDFD</p>
+                <h3>Ticket System</h3>
+            </a>
+        </div>
     </section>
 
-    <footer class="footer">
+    <section id="contact-section">
+        <h2 class="section-title">Contact Me</h2>
+        <div class="contact-form">
+            <form action="https://formspree.io/f/xojnbeyb" method="POST">
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="Email Address" required>
+                <textarea name="message" rows="5" placeholder="Your Message..." required></textarea>
+                <button type="submit" class="submit-btn">SEND MESSAGE</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer" id="footer">
         <div class="social-icons">
             <a href="https://discord.gg/void"><i class="fa-brands fa-discord"></i></a>
             <a href="mailto:kabir0juneja@gmail.com"><i class="fa-solid fa-envelope"></i></a>
             <a href="https://guns.lol/kabirjuneja"><i class="fa-solid fa-gun tilt"></i></a>
         </div>
-        <p style="font-size: 0.8rem; color: #555;">© 2026 Kabir Juneja. All Rights Reserved.</p>
+        <p class="copyright">© 2026 KABIR JUNEJA. ALL RIGHTS RESERVED.</p>
     </footer>
 
     <script>
+        // --- Navigation Scroll Logic ---
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- Scroll Reveal Logic ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('section, footer').forEach(el => observer.observe(el));
+
         // --- Discord Status Logic ---
         const discordID = "1301883723247124521";
         async function updateStatus() {
@@ -186,18 +232,6 @@
         }
         updateStatus();
         setInterval(updateStatus, 30000);
-
-        // --- Scroll Reveal Logic ---
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('reveal');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.code-card').forEach(card => observer.observe(card));
     </script>
 </body>
 </html>
