@@ -14,7 +14,6 @@
             --text-dim: #888888;
             --card-bg: #111111;
             --border: rgba(255, 255, 255, 0.1);
-            /* Blue Gradient for Titles */
             --grad: linear-gradient(90deg, #00d2ff 0%, #3a7bd5 100%);
         }
 
@@ -51,14 +50,14 @@
 
         /* --- SECTION LOGIC --- */
         section {
-            min-height: 90vh; /* Reduced height slightly for less spacing */
+            min-height: 85vh;
             width: 100%;
             max-width: 850px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 60px 20px;
+            padding: 50px 20px;
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.6s ease-out;
@@ -77,7 +76,6 @@
             display: inline-block;
             position: relative;
         }
-        /* Underline for the main name only */
         .hero-text h1::after {
             content: '';
             position: absolute;
@@ -97,7 +95,7 @@
         .section-title { 
             font-family: 'Orbitron', sans-serif; 
             font-size: 1.8rem; 
-            margin-bottom: 30px; 
+            margin-bottom: 25px; 
             align-self: flex-start;
             background: var(--grad);
             -webkit-background-clip: text;
@@ -113,7 +111,7 @@
         /* --- CODES GRID (2x2 Desktop) --- */
         .codes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; width: 100%; }
         .code-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-decoration: none; color: inherit; transition: 0.3s; }
-        .code-card:hover { border-color: #3a7bd5; transform: translateY(-3px); }
+        .code-card:hover { border-color: #3a7bd5; transform: translateY(-3px); background: #161616; }
         .code-card h3 { font-family: 'Orbitron', sans-serif; font-size: 1rem; margin: 0 0 8px 0; color: #fff; }
         .code-card p { color: var(--text-dim); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; margin: 0; }
 
@@ -121,6 +119,7 @@
         form { background: var(--card-bg); padding: 30px; border-radius: 16px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 15px; width: 100%; }
         input, textarea { background: #0a0a0a; border: 1px solid var(--border); padding: 12px; border-radius: 8px; color: white; font-family: 'Inter', sans-serif; outline: none; }
         .submit-btn { background: var(--grad); color: white; border: none; padding: 14px; border-radius: 8px; font-weight: bold; font-family: 'Orbitron', sans-serif; cursor: pointer; transition: 0.3s; }
+        .submit-btn:hover { filter: brightness(1.2); }
 
         /* --- FOOTER --- */
         .footer { width: 100%; padding: 40px 20px; text-align: center; opacity: 0; transition: 0.8s ease; }
@@ -190,27 +189,27 @@
     <section id="codes-section">
         <h2 class="section-title">My Codes</h2>
         <div class="codes-grid">
-            <a href="#" class="code-card">
+            <a href="codes/bitccode" class="code-card">
                 <p><i class="fas fa-code"></i> BDFD</p>
                 <h3>Bitcoin Tracker</h3>
             </a>
-            <a href="#" class="code-card">
+            <a href="codes/hexcode" class="code-card">
                 <p><i class="fas fa-code"></i> BDFD</p>
-                <h3>HEX Role Gen</h3>
+                <h3>Hex Role Gen</h3>
             </a>
-            <a href="#" class="code-card">
+            <a href="codes/gwcode" class="code-card">
                 <p><i class="fas fa-code"></i> BDFD</p>
                 <h3>Giveaway System</h3>
             </a>
-            <a href="#" class="code-card">
+            <a href="codes/welcomecode" class="code-card">
                 <p><i class="fas fa-code"></i> BDFD</p>
                 <h3>Welcome Cards</h3>
             </a>
-            <a href="#" class="code-card">
+            <a href="codes/whoiscode" class="code-card">
                 <p><i class="fas fa-code"></i> BDFD</p>
                 <h3>Whois Module</h3>
             </a>
-            <a href="#" class="code-card">
+            <a href="codes/ticket/code" class="code-card">
                 <p><i class="fas fa-code"></i> BDFD</p>
                 <h3>Ticket System</h3>
             </a>
