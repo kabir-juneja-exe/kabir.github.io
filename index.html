@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sha?dow | Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #0a0a0a;
@@ -38,154 +38,65 @@
             align-items: center;
             box-sizing: border-box;
         }
-
-        .nav-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-decoration: none;
-            color: white;
-        }
-
+        .nav-logo { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 700; letter-spacing: 2px; text-decoration: none; color: white; }
         .nav-links { display: flex; gap: 20px; }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dim);
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
+        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.9rem; transition: 0.3s; }
         .nav-links a:hover { color: white; }
 
         /* --- HERO SECTION --- */
-        .hero {
-            margin-top: 60px;
-            text-align: center;
-            max-width: 600px;
-            padding: 0 20px;
-        }
-
-        .avatar-main {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 2px solid var(--border);
-            padding: 5px;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.8rem;
-            margin: 10px 0;
-            letter-spacing: -1px;
-        }
-
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--card-bg);
-            padding: 6px 15px;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            font-size: 0.85rem;
-            color: var(--text-dim);
-            margin-bottom: 20px;
-        }
-
+        .hero { margin-top: 60px; text-align: center; max-width: 600px; padding: 0 20px; }
+        .avatar-main { width: 120px; height: 120px; border-radius: 50%; border: 2px solid var(--border); padding: 5px; margin-bottom: 20px; }
+        h1 { font-family: 'Orbitron', sans-serif; font-size: 2.8rem; margin: 10px 0; letter-spacing: -1px; }
+        .status-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--card-bg); padding: 6px 15px; border-radius: 20px; border: 1px solid var(--border); font-size: 0.85rem; color: var(--text-dim); margin-bottom: 20px; }
         .dot { width: 8px; height: 8px; border-radius: 50%; background: #555; }
         .dot.online { background: #23a55a; box-shadow: 0 0 8px #23a55a; }
 
-        .bio {
-            font-size: 1.1rem;
-            color: var(--text-dim);
-            line-height: 1.6;
-            margin-bottom: 40px;
-        }
-
-        /* --- BENTO / INFO GRID --- */
-        .grid {
+        /* --- MY CODES SECTION (NEW) --- */
+        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; margin: 80px 0 30px 0; width: 100%; max-width: 800px; text-align: left; padding: 0 20px; box-sizing: border-box; }
+        
+        .codes-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, 1fr); /* 2 columns for home page feel */
             gap: 20px;
             width: 100%;
             max-width: 800px;
-            padding: 20px;
+            padding: 0 20px;
             box-sizing: border-box;
+            margin-bottom: 60px;
         }
 
-        .card {
+        .code-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 25px;
-            transition: 0.3s;
-        }
-        .card:hover { border-color: rgba(255,255,255,0.3); transform: translateY(-5px); }
-
-        .card h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
-            margin-top: 0;
-            color: var(--text-dim);
-        }
-
-        /* --- CONTACT FORM --- */
-        .contact-form {
-            width: 100%;
-            max-width: 800px;
             padding: 20px;
-            box-sizing: border-box;
-            margin-bottom: 80px;
+            text-decoration: none;
+            color: inherit;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0; /* For scroll reveal */
+            transform: translateY(30px);
         }
 
-        form {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 16px;
-            border: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+        .code-card.reveal { opacity: 1; transform: translateY(0); }
+        .code-card:hover { border-color: rgba(255,255,255,0.4); transform: scale(1.02); background: #161616; }
+        .code-card h3 { font-family: 'Orbitron', sans-serif; font-size: 1rem; margin: 0 0 10px 0; color: #fff; }
+        .code-card p { color: var(--text-dim); font-size: 0.85rem; margin: 0; display: flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 1px; }
 
-        input, textarea {
-            background: #0a0a0a;
-            border: 1px solid var(--border);
-            padding: 12px;
-            border-radius: 8px;
-            color: white;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .submit-btn {
-            background: white;
-            color: black;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-family: 'Orbitron', sans-serif;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .submit-btn:hover { background: #ccc; }
-
-        /* --- FOOTER --- */
-        .footer {
-            margin-top: auto;
-            padding: 40px;
-            text-align: center;
-        }
-
+        /* --- CONTACT & FOOTER --- */
+        .contact-form { width: 100%; max-width: 800px; padding: 20px; box-sizing: border-box; margin-bottom: 40px; }
+        form { background: var(--card-bg); padding: 30px; border-radius: 16px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 15px; }
+        input, textarea { background: #0a0a0a; border: 1px solid var(--border); padding: 12px; border-radius: 8px; color: white; font-family: 'Inter', sans-serif; outline: none; }
+        input:focus { border-color: #fff; }
+        .submit-btn { background: white; color: black; border: none; padding: 12px; border-radius: 8px; font-weight: bold; font-family: 'Orbitron', sans-serif; cursor: pointer; transition: 0.3s; }
+        
+        .footer { padding: 40px; text-align: center; }
         .social-icons { display: flex; gap: 25px; justify-content: center; margin-bottom: 20px; }
         .social-icons a { color: var(--text-dim); font-size: 1.5rem; transition: 0.3s; }
         .social-icons a:hover { color: white; transform: scale(1.1); }
         .tilt { transform: rotate(-35deg); display: inline-block; }
 
         @media (max-width: 600px) {
-            .grid { grid-template-columns: 1fr; }
+            .codes-grid { grid-template-columns: 1fr; }
             h1 { font-size: 2rem; }
         }
     </style>
@@ -195,33 +106,48 @@
     <nav class="nav-header">
         <a href="index.html" class="nav-logo">SHA?DOW</a>
         <div class="nav-links">
-            <a href="codes">Codes</a>
-            <a href="about">About</a>
-            <a href="contact">Contact</a>
+            <a href="codes.html">Codes</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
         </div>
     </nav>
 
     <section class="hero">
         <img src="https://cdn.discordapp.com/avatars/1301883723247124521/4793f5066c0ee12d60df0414b57fe1ee.png" class="avatar-main" alt="Avatar">
-        
         <div class="status-badge">
             <div id="status-dot" class="dot"></div>
             <span id="status-text">Fetching status...</span>
         </div>
-
         <h1>Hello, I'm Sha?dow</h1>
-        <p class="bio">A passionate Developer and Designer specializing in Bot Development and Web Aesthetics. Creating clean, functional, and futuristic digital experiences.</p>
+        <p style="color: var(--text-dim); line-height: 1.6;">Developer and Designer specializing in Bot Development and Web Aesthetics.</p>
     </section>
 
-    <div class="grid">
-        <div class="card">
-            <h3>Specialty</h3>
-            <p>Discord Bot Development (BDScript 2), UI/UX Design, and Front-end Web.</p>
-        </div>
-        <div class="card">
-            <h3>Location</h3>
-            <p>Based in Earth, coding in the Void.</p>
-        </div>
+    <h2 class="section-title">My Codes</h2>
+    <div class="codes-grid">
+        <a href="codes/btccode" class="code-card">
+            <p><i class="fas fa-code"></i> BDFD</p>
+            <h3>Bitcoin Price</h3>
+        </a>
+        <a href="codes/hexcode" class="code-card">
+            <p><i class="fas fa-code"></i> BDFD</p>
+            <h3>HEX Role</h3>
+        </a>
+        <a href="codes/gwcode" class="code-card">
+            <p><i class="fas fa-code"></i> BDFD</p>
+            <h3>Giveaway</h3>
+        </a>
+        <a href="codes/welcomecode" class="code-card">
+            <p><i class="fas fa-code"></i> BDFD</p>
+            <h3>Welcome Card</h3>
+        </a>
+        <a href="codes/whoiscode" class="code-card">
+            <p><i class="fas fa-code"></i> BDFD</p>
+            <h3>Whois Info</h3>
+        </a>
+        <a href="codes/ticketcode" class="code-card">
+            <p><i class="fas fa-code"></i> BDFD</p>
+            <h3>Ticket System</h3>
+        </a>
     </div>
 
     <section class="contact-form">
@@ -244,35 +170,34 @@
     </footer>
 
     <script>
+        // --- Discord Status Logic ---
         const discordID = "1301883723247124521";
-        
         async function updateStatus() {
             try {
                 const response = await fetch(`https://api.lanyard.rest/v1/users/${discordID}`);
                 const { data } = await response.json();
                 const dot = document.getElementById('status-dot');
                 const text = document.getElementById('status-text');
-
-                if (data.discord_status === "online") {
-                    dot.className = "dot online";
-                    text.innerText = "Online & Coding";
-                } else if (data.discord_status === "dnd") {
-                    dot.className = "dot online"; dot.style.background = "#ed4245";
-                    text.innerText = "Do Not Disturb";
-                } else if (data.discord_status === "idle") {
-                    dot.className = "dot online"; dot.style.background = "#faa61a";
-                    text.innerText = "Away from keyboard";
-                } else {
-                    dot.className = "dot";
-                    text.innerText = "Currently Offline";
-                }
-            } catch (e) {
-                console.error("Status error");
-            }
+                if (data.discord_status === "online") { dot.className = "dot online"; text.innerText = "Online & Coding"; }
+                else if (data.discord_status === "dnd") { dot.className = "dot online"; dot.style.background = "#ed4245"; text.innerText = "Do Not Disturb"; }
+                else if (data.discord_status === "idle") { dot.className = "dot online"; dot.style.background = "#faa61a"; text.innerText = "Away from keyboard"; }
+                else { dot.className = "dot"; text.innerText = "Currently Offline"; }
+            } catch (e) { console.error("Status error"); }
         }
-
         updateStatus();
         setInterval(updateStatus, 30000);
+
+        // --- Scroll Reveal Logic ---
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.code-card').forEach(card => observer.observe(card));
     </script>
 </body>
 </html>
