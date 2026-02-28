@@ -77,10 +77,7 @@
             border-radius: 2px;
         }
 
-        .back-link:hover {
-            opacity: 0.8;
-            transform: translateX(-3px);
-        }
+        .back-link:hover { opacity: 0.8; transform: translateX(-3px); }
 
         /* --- CONTENT --- */
         .container {
@@ -98,8 +95,11 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .description { color: var(--text-dim); margin-bottom: 30px; font-size: 0.9rem; line-height: 1.6; }
-        code { background: #222; padding: 2px 6px; border-radius: 4px; color: var(--accent); font-family: 'Courier Prime', monospace; }
+        .description { color: var(--text-dim); margin-bottom: 30px; font-size: 0.9rem; line-height: 1.8; }
+        
+        /* Highlighted Variables */
+        code { background: #1a1a1a; padding: 3px 8px; border-radius: 4px; color: #fff; border: 1px solid var(--border); font-family: 'Courier Prime', monospace; font-size: 0.85rem; }
+        .val-highlight { color: var(--accent); font-weight: bold; }
 
         /* --- TABS --- */
         .tab-container { display: flex; gap: 10px; margin-bottom: 15px; }
@@ -165,7 +165,8 @@
         .footer { padding: 60px 20px; text-align: center; margin-top: auto; }
         .social-icons { display: flex; gap: 25px; justify-content: center; margin-bottom: 20px; }
         .social-icons a { color: var(--text-dim); font-size: 1.5rem; transition: 0.3s; }
-        .social-icons a:hover { color: #00d2ff; }
+        .social-icons a:hover { color: #00d2ff; transform: scale(1.1); }
+        .tilt { transform: rotate(-35deg); display: inline-block; }
     </style>
 </head>
 <body>
@@ -183,7 +184,7 @@
         <h1>Giveaway System</h1>
         <p class="description">
             Full-featured Container Giveaway System. Use <code>?gw [prize]</code> to start.<br>
-            Requires variables: <code>giveawayPrize</code> and <code>giveawayParticipants</code>.
+            Requires variables: <code>giveawayPrize</code> <span class="val-highlight">(value= none)</span> and <code>giveawayParticipants</code> <span class="val-highlight">(value= none)</span>
         </p>
 
         <div class="tab-container">
